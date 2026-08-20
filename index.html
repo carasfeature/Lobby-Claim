@@ -95,8 +95,8 @@
 
 <script>
 const CLIENT_ID = 'ube5lbxw2yje55kku6hckuturx6s0g';
-const REDIRECT_URI = 'https://carasfeature.github.io/lobby-claim/';
-const DATA_URL = 'https://raw.githubusercontent.com/carasfeature/lobby-claim/main/data.json';
+const REDIRECT_URI = 'https://carasfeature.github.io/Lobby-Claim/';
+const DATA_URL = 'https://raw.githubusercontent.com/carasfeature/Lobby-Claim/main/data.json';
 
 function startLogin(){
   const url = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=`;
@@ -175,7 +175,7 @@ function render(){
 
 function reveal(i){
   const el = document.getElementById('code-' + i);
-  el.textContent = tournamentData.rounds[i].code || 'Code not set yet — ask a mod';
+  el.textContent = tournamentData.rounds[i].code || 'Code not set yet';
   el.style.display = 'block';
 }
 function revealFinals(){
