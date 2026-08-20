@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fortnite Chamber Tournament</title>
+<style>
+  :root{
+    --bg:#141018;
+    --card:#1e1826;
+    --card-locked:#1a1620;
+    --line:#2f2740;
+    --purple:#8b5cf6;
+    --purple-dim:#4c3a6b;
+    --text:#f2eefa;
+    --dim:#9a8fb0;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Segoe UI', system-ui, sans-serif;
+    min-height:100vh; display:flex; flex-direction:column; align-items:center;
+    padding:60px 20px;
+  }
+  h1{ font-size:38px; font-weight:800; margin:0 0 8px; text-align:center; }
+  .subtitle{
+    color:var(--purple); font-weight:700; letter-spacing:2px; font-size:14px;
+    margin-bottom:36px; text-transform:uppercase;
+  }
+
+  .login-box{ text-align:center; margin-top:40px; }
+  .login-box p{ color:var(--dim); font-size:14px; margin-bottom:20px; }
+  .twitch-btn{
+    background:#9146FF; color:white; border:none; padding:12px 24px;
+    border-radius:8px; font-size:15px; font-weight:600; cursor:pointer;
+  }
+
+  .userbar{ color:var(--dim); font-size:13px; margin-bottom:28px; text-align:center; }
+  .userbar b{ color:var(--text); }
+
+  .rounds-row{
+    display:flex; gap:16px; flex-wrap:wrap; justify-content:center; max-width:1000px;
+  }
+  .card{
+    background:var(--card-locked); border:1px solid var(--line); border-radius:14px;
+    width:160px; padding:20px 12px; text-align:center;
+  }
+  .card.unlocked{ background:var(--card); border-color:var(--purple-dim); }
+  .card .rname{ font-size:16px; font-weight:800; margin-bottom:14px; letter-spacing:.5px; }
+  .card button{
+    width:100%; padding:9px 0; border-radius:7px; border:none; font-weight:700;
+    font-size:13px; cursor:pointer; background:var(--purple-dim); color:#c9bfe0;
+  }
+  .card.unlocked button{ background:var(--purple); color:white; cursor:pointer; }
+  .card.locked button{ cursor:default; opacity:.6; }
+  .code-reveal{
+    margin-top:10px; font-size:18px; font-weight:800; letter-spacing:2px;
+    color:var(--purple);
+  }
+  .need-more{ font-size:11px; color:var(--dim); margin-top:8px; }
+
+  .finals{
+    margin-top:24px; width:100%; max-width:480px; background:var(--card);
+    border:1px solid var(--purple); border-radius:16px; padding:24px; text-align:center;
+  }
+  .finals .rname{ font-size:24px; font-weight:800; margin-bottom:14px; }
+  .finals button{
+    width:100%; padding:12px; border-radius:8px; border:none; font-weight:700;
+    font-size:14px; cursor:pointer; background:var(--purple); color:white;
+  }
+  .finals .code-reveal{ font-size:22px; margin-top:12px; }
+
+  .refresh-note{ margin-top:32px; font-size:11px; color:var(--dim); text-align:center; max-width:400px; }
+  .reload-btn{ background:none; border:1px solid var(--line); color:var(--dim); padding:5px 12px; border-radius:6px; font-size:12px; cursor:pointer; margin-top:8px; }
+</style>
+</head>
+<body>
+
+<h1>Fortnite Chamber Tournament</h1>
+<div class="subtitle">Claim Your Code</div>
+
+<div id="loginBox" class="login-box">
+  <p>Log in with Twitch to check your gifted sub total</p>
+  <button class="twitch-btn" onclick="startLogin()">Login with Twitch</button>
+</div>
+
+<div id="app" style="display:none; width:100%; display:flex; flex-direction:column; align-items:center;">
+  <div class="userbar">Logged in as <b id="userName"></b> — <span id="userCount"></span> gifted subs</div>
+  <div class="rounds-row" id="roundsRow"></div>
+  <div class="finals" id="finalsCard"></div>
+  <div class="refresh-note">
+    Codes update live during the show. If a round just unlocked and doesn't show yet, refresh.
+    <br><button class="reload-btn" onclick="loadData()">Refresh</button>
+  </div>
+</div>
+
+<script>
+const CLIENT_ID = 'ube5lbxw2yje55kku6hckuturx6s0g';
+const REDIRECT_URI = 'https://carasfeature.github.io/lobby-claim/';
+const DATA_URL = 'https://raw.githubusercontent.com/carasfeature/lobby-claim/main/data.json';
+
+function startLogin(){
+  const url = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=`;
+  window.location.href = url;
+}
+
+let currentUser = null;
+let tournamentData = null;
+
+async function init(){
+  const hash = window.location.hash;
+  if(hash.includes('access_token')){
+    const params = new URLSearchParams(hash.slice(1));
+    const token = params.get('access_token');
+    if(token){
+      await fetchUser(token);
+      history.replaceState(null, '', window.location.pathname);
+    }
+  }
+}
+
+async function fetchUser(token){
+  try{
+    const res = await fetch('https://api.twitch.tv/helix/users', {
+      headers: { 'Authorization': 'Bearer ' + token, 'Client-Id': CLIENT_ID }
+    });
+    const data = await res.json();
+    if(data.data && data.data[0]){
+      currentUser = data.data[0].login.toLowerCase();
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('app').style.display = 'flex';
+      document.getElementById('userName').textContent = data.data[0].display_name;
+      await loadData();
+    }
+  }catch(e){
+    alert('Login failed, try again.');
+  }
+}
+
+async function loadData(){
+  try{
+    const res = await fetch(DATA_URL + '?t=' + Date.now());
+    tournamentData = await res.json();
+    render();
+  }catch(e){
+    document.getElementById('roundsRow').innerHTML = '<p style="color:var(--dim)">Could not load round data — try refreshing in a moment.</p>';
+  }
+}
+
+function render(){
+  if(!tournamentData || !currentUser) return;
+  const count = tournamentData.eligibility[currentUser] || 0;
+  document.getElementById('userCount').textContent = count;
+
+  const row = document.getElementById('roundsRow');
+  row.innerHTML = tournamentData.rounds.map((r, i) => {
+    const unlocked = count >= r.threshold;
+    return `<div class="card ${unlocked ? 'unlocked' : 'locked'}">
+      <div class="rname">${r.name}</div>
+      ${unlocked
+        ? `<button onclick="reveal(${i})">Claim</button><div id="code-${i}" class="code-reveal" style="display:none;"></div>`
+        : `<button disabled>🔒 Claim</button><div class="need-more">Need ${r.threshold} gifted (${count}/${r.threshold})</div>`
+      }
+    </div>`;
+  }).join('');
+
+  const finalsUnlocked = !!tournamentData.finals.code;
+  document.getElementById('finalsCard').innerHTML = `
+    <div class="rname">FINALS</div>
+    ${finalsUnlocked
+      ? `<button onclick="revealFinals()">Claim</button><div id="code-finals" class="code-reveal" style="display:none;"></div>`
+      : `<button disabled>Not open yet</button>`
+    }
+  `;
+}
+
+function reveal(i){
+  const el = document.getElementById('code-' + i);
+  el.textContent = tournamentData.rounds[i].code || 'Code not set yet — ask a mod';
+  el.style.display = 'block';
+}
+function revealFinals(){
+  const el = document.getElementById('code-finals');
+  el.textContent = tournamentData.finals.code;
+  el.style.display = 'block';
+}
+
+init();
+</script>
+
+</body>
+</html>
