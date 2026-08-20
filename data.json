@@ -1,0 +1,33 @@
+{
+  "rounds": [
+    {
+      "name": "Round 1",
+      "threshold": 5,
+      "code": ""
+    },
+    {
+      "name": "Round 2",
+      "threshold": 10,
+      "code": ""
+    },
+    {
+      "name": "Round 3",
+      "threshold": 15,
+      "code": ""
+    },
+    {
+      "name": "Round 4",
+      "threshold": 20,
+      "code": ""
+    },
+    {
+      "name": "Round 5",
+      "threshold": 25,
+      "code": ""
+    }
+  ],
+  "finals": {
+    "code": "test test"
+  },
+  "eligibility": {}
+}
