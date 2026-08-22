@@ -63,7 +63,7 @@
   .hero{padding:0 0 40px; text-align:center;}
   h1.title{
     font-family:'Archivo Black', sans-serif; font-weight:400;
-    font-size:11.4vw; line-height:0.92; letter-spacing:-0.015em;
+    font-size:5.7vw; line-height:0.92; letter-spacing:-0.015em;
     text-transform:uppercase; padding:0 4px; margin:0;
   }
   .sub-row{
@@ -73,11 +73,11 @@
   .orb{width:22px; height:22px; flex:none;}
   .orb circle, .orb ellipse, .orb path{stroke:var(--blue); fill:none; stroke-width:1.6;}
   .eyebrow-line{
-    font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:0.3em; font-size:13px;
+    font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:0.3em; font-size:26px;
     text-transform:uppercase; color:var(--ink);
   }
   .game-wordmark{
-    font-family:'Archivo Black', sans-serif; font-size:clamp(20px,3vw,30px); letter-spacing:4px;
+    font-family:'Archivo Black', sans-serif; font-size:clamp(40px,6vw,60px); letter-spacing:4px;
     margin-top:10px; color:var(--ink-soft); text-transform:uppercase;
   }
   .game-wordmark span{color:var(--ink);}
@@ -182,6 +182,13 @@
   .winner-chip .u{font-size:13px; color:var(--blue); margin-top:6px; font-style:italic; opacity:0.85;}
   .winner-chip .u.full{color:var(--red);}
 
+  .qual-round{margin-bottom:16px;}
+  .qual-round:last-child{margin-bottom:0;}
+  .qual-round h4{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); margin:0 0 8px; padding-bottom:6px; border-bottom:1px solid var(--border-soft);}
+  .qual-round ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px;}
+  .qual-round li{font-size:12px; color:var(--ink-soft); display:flex; gap:8px;}
+  .qual-round li b{color:var(--blue); font-family:'Space Grotesk', sans-serif; font-weight:700; width:12px;}
+
   .status-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
   .status-list li{
     display:flex; justify-content:space-between; align-items:center; font-size:12px;
@@ -276,14 +283,24 @@
       <div class="round-grid" id="roundGrid"></div>
 
       <div class="panel winners-panel" id="winners">
-        <p class="panel-title blue">Live Capacity</p>
-        <div class="winners-grid" id="capacityGrid"></div>
+        <p class="panel-title">Winners</p>
+        <div class="winners-grid">
+          <div class="winner-chip"><div class="r">Round 1</div><div class="u">username</div></div>
+          <div class="winner-chip"><div class="r">Round 2</div><div class="u">username</div></div>
+          <div class="winner-chip"><div class="r">Round 3</div><div class="u">username</div></div>
+          <div class="winner-chip"><div class="r">Round 4</div><div class="u">username</div></div>
+          <div class="winner-chip"><div class="r">Round 5</div><div class="u">username</div></div>
+        </div>
       </div>
     </div>
 
-    <aside class="panel" id="status">
-      <p class="panel-title blue">Your Status</p>
-      <ul class="status-list" id="statusList"></ul>
+    <aside class="panel">
+      <p class="panel-title blue">Qualified<br>For Finals</p>
+      <div class="qual-round"><h4>Round 1</h4><ol><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+      <div class="qual-round"><h4>Round 2</h4><ol><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+      <div class="qual-round"><h4>Round 3</h4><ol><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+      <div class="qual-round"><h4>Round 4</h4><ol><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+      <div class="qual-round"><h4>Round 5</h4><ol><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
     </aside>
 
   </div>
@@ -366,13 +383,11 @@ function buildRoundGrid(){
     html += `<div class="round-card" id="card-round-${i}">
       <div class="round-head"><h3>Round ${i+1}</h3></div>
       <div id="btnwrap-round-${i}"></div>
-      <div class="card-note" id="note-round-${i}"></div>
     </div>`;
   }
   html += `<div class="round-card final" id="card-final">
     <div class="round-head"><h3>Final</h3></div>
     <div id="btnwrap-final"></div>
-    <div class="card-note" id="note-final"></div>
   </div>`;
   document.getElementById('roundGrid').innerHTML = html;
 }
@@ -384,60 +399,25 @@ function render(){
   document.getElementById('statusBar').style.display = 'block';
   document.getElementById('statusBar').innerHTML = `Logged in as <b>${escapeHtml(currentDisplay)}</b> — <b>${count}</b> gifted subs`;
 
-  const capGrid = document.getElementById('capacityGrid');
-  const statusList = document.getElementById('statusList');
-  capGrid.innerHTML = '';
-  statusList.innerHTML = '';
-
   tournamentData.rounds.forEach((r, i) => {
     const qualified = (r.qualified || []).includes(currentUser);
-    const metThreshold = count >= r.threshold;
     const isOpen = !!r.open;
-    const filled = (r.qualified || []).length;
-    const cap = r.cap || 95;
-
     const btnwrap = document.getElementById('btnwrap-round-' + i);
-    const note = document.getElementById('note-round-' + i);
 
     if(qualified && isOpen){
       btnwrap.innerHTML = `<button class="claim-btn open" onclick="reveal(${i})">Claim</button>`;
-      note.className = 'card-note';
-      note.textContent = '';
-    } else if(qualified && !isOpen){
-      btnwrap.innerHTML = `<button class="claim-btn muted" disabled>${LOCK_ICON}Claim</button>`;
-      note.className = 'card-note info';
-      note.textContent = "You're in — opens after the game.";
-    } else if(metThreshold && !qualified){
-      btnwrap.innerHTML = `<button class="claim-btn muted" disabled>${LOCK_ICON}Claim</button>`;
-      note.className = 'card-note warn';
-      note.textContent = 'Round full — missed the cutoff';
     } else {
       btnwrap.innerHTML = `<button class="claim-btn" disabled>${LOCK_ICON}Claim</button>`;
-      note.className = 'card-note';
-      note.textContent = `Need ${r.threshold} gifted (${count}/${r.threshold})`;
     }
-
-    capGrid.innerHTML += `<div class="winner-chip"><div class="r">${r.name}</div><div class="u ${filled>=cap?'full':''}">${filled}/${cap}</div></div>`;
-
-    let stClass = 'locked', stText = 'Locked';
-    if(qualified && isOpen){ stClass='claimopen'; stText='Open'; }
-    else if(qualified && !isOpen){ stClass='waiting'; stText='Waiting'; }
-    else if(metThreshold && !qualified){ stClass='full'; stText='Full'; }
-    statusList.innerHTML += `<li><span class="rn">${r.name}</span><span class="st ${stClass}">${stText}</span></li>`;
   });
 
   const finalsOpen = !!tournamentData.finals.open && !!tournamentData.finals.code;
   const fbtnwrap = document.getElementById('btnwrap-final');
-  const fnote = document.getElementById('note-final');
   if(finalsOpen){
     fbtnwrap.innerHTML = `<button class="claim-btn trophy" onclick="revealFinals()">${TROPHY_ICON}Claim</button>`;
-    fnote.textContent = '';
   } else {
     fbtnwrap.innerHTML = `<button class="claim-btn trophy" disabled style="opacity:.55;">${TROPHY_ICON}Claim</button>`;
-    fnote.className = 'card-note';
-    fnote.textContent = 'Not open yet';
   }
-  statusList.innerHTML += `<li><span class="rn">Final</span><span class="st ${finalsOpen?'claimopen':'locked'}">${finalsOpen?'Open':'Locked'}</span></li>`;
 }
 
 function reveal(i){
