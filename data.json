@@ -4,28 +4,33 @@
     {
       "name": "Round 1",
       "cap": 95,
-      "code": "",
-      "open": false,
-      "qualified": []
+      "code": "fdlkgjeworjgojkdtsgjiordgs",
+      "open": true,
+      "qualified": [
+        "eloise",
+        "car0lyke"
+      ]
     },
     {
       "name": "Round 2",
       "cap": 95,
-      "code": "",
+      "code": "1111111111111111111",
       "open": false,
-      "qualified": []
+      "qualified": [
+        "car0lyke"
+      ]
     },
     {
       "name": "Round 3",
       "cap": 95,
-      "code": "",
+      "code": "2232432653465476547654734",
       "open": false,
       "qualified": []
     },
     {
       "name": "Round 4",
       "cap": 95,
-      "code": "",
+      "code": "++++++++++++++++++++",
       "open": false,
       "qualified": []
     }
@@ -38,5 +43,8 @@
     "code": "",
     "open": false
   },
-  "eligibility": {}
+  "eligibility": {
+    "eloise": 5,
+    "car0lyke": 10
+  }
 }
