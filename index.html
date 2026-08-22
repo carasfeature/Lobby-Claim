@@ -144,7 +144,7 @@
   .round-head h3{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:15px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink);}
   .round-card.final .round-head h3{color:#fff;}
   .claim-btn{
-    width:100%; padding:12px 14px; border-radius:var(--radius); background:transparent;
+    width:100%; padding:14px 10px; border-radius:var(--radius); background:transparent;
     border:1.5px solid var(--red); color:var(--red);
     font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:0.1em; font-size:14px;
     text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:8px;
@@ -168,9 +168,9 @@
   .round-card.final .card-note.warn{color:#ff6b5e;}
 
   .code-box{
-    border:1.5px dashed var(--border); border-radius:var(--radius); padding:12px;
+    border:1.5px dashed var(--border); border-radius:var(--radius); padding:12px 8px;
     text-align:center; font-family:'Space Grotesk', sans-serif; font-weight:700;
-    letter-spacing:3px; font-size:17px; color:var(--red);
+    letter-spacing:1px; font-size:15px; color:var(--red); word-break:break-all;
   }
   .round-card.final .code-box{color:#fff; border-color:#555;}
 
@@ -188,6 +188,15 @@
   .qual-round ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px;}
   .qual-round li{font-size:12px; color:var(--ink-soft); display:flex; gap:8px;}
   .qual-round li b{color:var(--blue); font-family:'Space Grotesk', sans-serif; font-weight:700; width:12px;}
+
+  .left-col{display:flex; flex-direction:column; gap:22px;}
+  .prize-block{margin-bottom:14px;}
+  .prize-block:last-child{margin-bottom:0;}
+  .prize-block h4{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); margin:0 0 8px; padding-bottom:6px; border-bottom:1px solid var(--border-soft);}
+  .prize-block ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:5px;}
+  .prize-block li{font-size:12px; color:var(--ink-soft); display:flex; gap:8px; justify-content:space-between;}
+  .prize-block li b{color:var(--red); font-family:'Space Grotesk', sans-serif; font-weight:700; flex:none;}
+  .prize-block li span{color:var(--ink); font-weight:600;}
 
   .status-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
   .status-list li{
@@ -253,6 +262,7 @@
 <div class="wrap" id="wrap">
   <div class="layout">
 
+    <div class="left-col">
     <aside class="panel" id="faq">
       <p class="panel-title red">FAQ</p>
       <div id="faqList">
@@ -262,7 +272,7 @@
         </div>
         <div class="faq-item">
           <button class="faq-q"><span class="num">2</span><span>How do I unlock a round?</span><span class="chev">+</span></button>
-          <div class="faq-a"><p>Gift 5+ subs for Round 1, 10+ for Round 1-2, 15+ for 1-3, and so on up to 25+.</p></div>
+          <div class="faq-a"><p>Gift 5+ subs to unlock whichever round is currently live, 10+ unlocks it plus the next one, and so on up to 4 rounds forward.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q"><span class="num">3</span><span>How do I claim my code?</span><span class="chev">+</span></button>
@@ -273,11 +283,32 @@
           <div class="faq-a"><p>Only the first 95 gifters per round get a seat. Miss it and that round's closed — but you can still land later rounds.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span class="num">5</span><span>What about the Final?</span><span class="chev">+</span></button>
-          <div class="faq-a"><p>Open to everyone once a mod unlocks it — no gifting required.</p></div>
+          <button class="faq-q"><span class="num">5</span><span>What about Round 5 and the Final?</span><span class="chev">+</span></button>
+          <div class="faq-a"><p>Both are free-for-all — open to everyone once a mod unlocks them, no gifting required.</p></div>
         </div>
       </div>
     </aside>
+
+    <aside class="panel" id="prizes">
+      <p class="panel-title">Prizes</p>
+      <div class="prize-block">
+        <h4>Each Round</h4>
+        <ul>
+          <li><b>1st</b><span>VIP Discord</span></li>
+          <li><b>2nd</b><span>VIP Discord</span></li>
+          <li><b>3rd</b><span>VIP Discord</span></li>
+        </ul>
+      </div>
+      <div class="prize-block">
+        <h4>Killed C/A</h4>
+        <ul><li><span>$25</span></li></ul>
+      </div>
+      <div class="prize-block">
+        <h4>Finals Winner</h4>
+        <ul><li><span>$250 + merch</span></li></ul>
+      </div>
+    </aside>
+    </div>
 
     <div class="bracket-col" id="bracket">
       <div class="round-grid" id="roundGrid"></div>
@@ -319,6 +350,8 @@ const TROPHY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" 
 let currentUser = null;
 let currentDisplay = null;
 let tournamentData = null;
+let revealedRounds = new Set(); // 'r0'..'r3', 'r5', 'final'
+let pollTimer = null;
 
 function startLogin(){
   const url = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=`;
@@ -361,6 +394,8 @@ async function fetchUser(token){
       document.getElementById('loginWrap').style.display = 'none';
       document.getElementById('wrap').style.display = 'block';
       await loadData();
+      if(pollTimer) clearInterval(pollTimer);
+      pollTimer = setInterval(loadData, 20000);
     }
   }catch(e){
     alert('Login failed, try again.');
@@ -373,7 +408,9 @@ async function loadData(){
     tournamentData = await res.json();
     render();
   }catch(e){
-    document.getElementById('roundGrid').innerHTML = '<p style="color:var(--ink-soft);grid-column:1/-1;">Could not load round data — refresh in a moment.</p>';
+    if(!tournamentData){
+      document.getElementById('roundGrid').innerHTML = '<p style="color:var(--ink-soft);grid-column:1/-1;">Could not load round data — refresh in a moment.</p>';
+    }
   }
 }
 
@@ -399,11 +436,16 @@ function render(){
   document.getElementById('statusBar').style.display = 'block';
   document.getElementById('statusBar').innerHTML = `Logged in as <b>${escapeHtml(currentDisplay)}</b> — <b>${count}</b> gifted subs`;
 
-  tournamentData.rounds.forEach((r, i) => {
+  // Rounds 1-4: laddered, per-user qualified list
+  (tournamentData.rounds || []).forEach((r, i) => {
+    const btnwrap = document.getElementById('btnwrap-round-' + i);
+    const key = 'r' + i;
+    if(revealedRounds.has(key)){
+      btnwrap.innerHTML = `<div class="code-box">${escapeHtml(r.code || 'Code not set yet — ask a mod')}</div>`;
+      return;
+    }
     const qualified = (r.qualified || []).includes(currentUser);
     const isOpen = !!r.open;
-    const btnwrap = document.getElementById('btnwrap-round-' + i);
-
     if(qualified && isOpen){
       btnwrap.innerHTML = `<button class="claim-btn open" onclick="reveal(${i})">Claim</button>`;
     } else {
@@ -411,9 +453,23 @@ function render(){
     }
   });
 
+  // Round 5: free-for-all, no per-user check
+  const r5 = tournamentData.round5 || {};
+  const r5btnwrap = document.getElementById('btnwrap-round-4');
+  if(revealedRounds.has('r5')){
+    r5btnwrap.innerHTML = `<div class="code-box">${escapeHtml(r5.code || 'Code not set yet — ask a mod')}</div>`;
+  } else if(!!r5.open && !!r5.code){
+    r5btnwrap.innerHTML = `<button class="claim-btn open" onclick="revealRound5()">Claim</button>`;
+  } else {
+    r5btnwrap.innerHTML = `<button class="claim-btn" disabled>${LOCK_ICON}Claim</button>`;
+  }
+
+  // Final: free-for-all, trophy style
   const finalsOpen = !!tournamentData.finals.open && !!tournamentData.finals.code;
   const fbtnwrap = document.getElementById('btnwrap-final');
-  if(finalsOpen){
+  if(revealedRounds.has('final')){
+    fbtnwrap.innerHTML = `<div class="code-box">${escapeHtml(tournamentData.finals.code)}</div>`;
+  } else if(finalsOpen){
     fbtnwrap.innerHTML = `<button class="claim-btn trophy" onclick="revealFinals()">${TROPHY_ICON}Claim</button>`;
   } else {
     fbtnwrap.innerHTML = `<button class="claim-btn trophy" disabled style="opacity:.55;">${TROPHY_ICON}Claim</button>`;
@@ -421,13 +477,16 @@ function render(){
 }
 
 function reveal(i){
-  const btnwrap = document.getElementById('btnwrap-round-' + i);
-  const code = tournamentData.rounds[i].code || 'Code not set yet — ask a mod';
-  btnwrap.innerHTML = `<div class="code-box">${escapeHtml(code)}</div>`;
+  revealedRounds.add('r' + i);
+  render();
+}
+function revealRound5(){
+  revealedRounds.add('r5');
+  render();
 }
 function revealFinals(){
-  const btnwrap = document.getElementById('btnwrap-final');
-  btnwrap.innerHTML = `<div class="code-box">${escapeHtml(tournamentData.finals.code)}</div>`;
+  revealedRounds.add('final');
+  render();
 }
 
 function escapeHtml(s){
