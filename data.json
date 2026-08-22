@@ -5,15 +5,20 @@
       "name": "Round 1",
       "cap": 95,
       "code": "1111-1111-1111-1111",
-      "open": false,
-      "qualified": []
+      "open": true,
+      "qualified": [
+        "eloise",
+        "car0lyke"
+      ]
     },
     {
       "name": "Round 2",
       "cap": 95,
       "code": "2222-2222-2222-2222",
       "open": false,
-      "qualified": []
+      "qualified": [
+        "car0lyke"
+      ]
     },
     {
       "name": "Round 3",
@@ -38,5 +43,8 @@
     "code": "",
     "open": false
   },
-  "eligibility": {}
+  "eligibility": {
+    "eloise": 5,
+    "car0lyke": 10
+  }
 }
