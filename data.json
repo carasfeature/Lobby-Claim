@@ -1,33 +1,42 @@
 {
+  "currentRound": 1,
   "rounds": [
     {
       "name": "Round 1",
-      "threshold": 5,
-      "code": "1234-5678-9101"
+      "cap": 95,
+      "code": "1111-1111-1111-1111",
+      "open": false,
+      "qualified": []
     },
     {
       "name": "Round 2",
-      "threshold": 10,
-      "code": ""
+      "cap": 95,
+      "code": "2222-2222-2222-2222",
+      "open": false,
+      "qualified": []
     },
     {
       "name": "Round 3",
-      "threshold": 15,
-      "code": ""
+      "cap": 95,
+      "code": "",
+      "open": false,
+      "qualified": []
     },
     {
       "name": "Round 4",
-      "threshold": 20,
-      "code": ""
-    },
-    {
-      "name": "Round 5",
-      "threshold": 25,
-      "code": ""
+      "cap": 95,
+      "code": "",
+      "open": false,
+      "qualified": []
     }
   ],
+  "round5": {
+    "code": "",
+    "open": false
+  },
   "finals": {
-    "code": "CODE-0000-CODE-FINAL"
+    "code": "",
+    "open": false
   },
   "eligibility": {}
 }
