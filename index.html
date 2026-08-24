@@ -339,10 +339,23 @@
   <footer>Chamber Tournaments · It's Not A Phase</footer>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-database-compat.js"></script>
 <script>
 const CLIENT_ID = 'ube5lbxw2yje55kku6hckuturx6s0g';
 const REDIRECT_URI = 'https://carasfeature.github.io/Lobby-Claim/';
-const DATA_URL = 'https://raw.githubusercontent.com/carasfeature/Lobby-Claim/main/data.json';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAdx6UIx2mHwqbK4KPKnXolbgmUcCR1Wvg",
+  authDomain: "lobby-claim.firebaseapp.com",
+  databaseURL: "https://lobby-claim-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "lobby-claim",
+  storageBucket: "lobby-claim.firebasestorage.app",
+  messagingSenderId: "41913061647",
+  appId: "1:41913061647:web:4eac52a2ddbb5ec2696e7a"
+};
+const fbApp = firebase.initializeApp(firebaseConfig);
+const fbDb = firebase.database();
 
 const LOCK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
 const TROPHY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4Z"/><path d="M7 5H4a3 3 0 0 0 3 5M17 5h3a3 3 0 0 1-3 5"/></svg>';
@@ -351,7 +364,6 @@ let currentUser = null;
 let currentDisplay = null;
 let tournamentData = null;
 let revealedRounds = new Set(); // 'r0'..'r3', 'r5', 'final'
-let pollTimer = null;
 
 function startLogin(){
   const url = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=`;
@@ -359,15 +371,6 @@ function startLogin(){
 }
 
 async function init(){
-  const hash = window.location.hash;
-  if(hash.includes('access_token')){
-    const params = new URLSearchParams(hash.slice(1));
-    const token = params.get('access_token');
-    if(token){
-      await fetchUser(token);
-      history.replaceState(null, '', window.location.pathname);
-    }
-  }
   buildRoundGrid();
   drawTrace();
   setTimeout(drawTrace, 400);
@@ -380,6 +383,16 @@ async function init(){
       if(!isOpen) item.classList.add('open');
     });
   });
+
+  const hash = window.location.hash;
+  if(hash.includes('access_token')){
+    const params = new URLSearchParams(hash.slice(1));
+    const token = params.get('access_token');
+    if(token){
+      await fetchUser(token);
+      history.replaceState(null, '', window.location.pathname);
+    }
+  }
 }
 
 async function fetchUser(token){
@@ -393,25 +406,24 @@ async function fetchUser(token){
       currentDisplay = data.data[0].display_name;
       document.getElementById('loginWrap').style.display = 'none';
       document.getElementById('wrap').style.display = 'block';
-      await loadData();
-      if(pollTimer) clearInterval(pollTimer);
-      pollTimer = setInterval(loadData, 20000);
+      startListening();
     }
   }catch(e){
     alert('Login failed, try again.');
   }
 }
 
-async function loadData(){
-  try{
-    const res = await fetch(DATA_URL + '?t=' + Date.now());
-    tournamentData = await res.json();
-    render();
-  }catch(e){
+function startListening(){
+  fbDb.ref('tournament').on('value', (snapshot) => {
+    tournamentData = snapshot.val();
     if(!tournamentData){
-      document.getElementById('roundGrid').innerHTML = '<p style="color:var(--ink-soft);grid-column:1/-1;">Could not load round data — refresh in a moment.</p>';
+      document.getElementById('roundGrid').innerHTML = '<p style="color:var(--ink-soft);grid-column:1/-1;">No tournament data yet — check back once a mod publishes.</p>';
+      return;
     }
-  }
+    render();
+  }, (error) => {
+    document.getElementById('roundGrid').innerHTML = '<p style="color:var(--ink-soft);grid-column:1/-1;">Could not load round data — refresh in a moment.</p>';
+  });
 }
 
 function buildRoundGrid(){
