@@ -416,13 +416,10 @@ async function fetchUser(token){
 function startListening(){
   fbDb.ref('tournament').on('value', (snapshot) => {
     tournamentData = snapshot.val();
-    if(!tournamentData){
-      document.getElementById('roundGrid').innerHTML = '<p style="color:var(--ink-soft);grid-column:1/-1;">No tournament data yet — check back once a mod publishes.</p>';
-      return;
-    }
+    if(!tournamentData) return; // leave default locked buttons showing until data arrives
     render();
   }, (error) => {
-    document.getElementById('roundGrid').innerHTML = '<p style="color:var(--ink-soft);grid-column:1/-1;">Could not load round data — refresh in a moment.</p>';
+    console.error('Firebase read error:', error);
   });
 }
 
@@ -431,12 +428,12 @@ function buildRoundGrid(){
   for(let i=0;i<5;i++){
     html += `<div class="round-card" id="card-round-${i}">
       <div class="round-head"><h3>Round ${i+1}</h3></div>
-      <div id="btnwrap-round-${i}"></div>
+      <div id="btnwrap-round-${i}"><button class="claim-btn" disabled>${LOCK_ICON}Claim</button></div>
     </div>`;
   }
   html += `<div class="round-card final" id="card-final">
     <div class="round-head"><h3>Final</h3></div>
-    <div id="btnwrap-final"></div>
+    <div id="btnwrap-final"><button class="claim-btn trophy" disabled style="opacity:.55;">${TROPHY_ICON}Claim</button></div>
   </div>`;
   document.getElementById('roundGrid').innerHTML = html;
 }
