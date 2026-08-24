@@ -82,9 +82,14 @@
   }
   .game-wordmark span{color:var(--ink);}
 
-  .hero-row{display:flex; align-items:center; justify-content:center; gap:28px; flex-wrap:wrap; padding:0 20px;}
-  .hero-center{flex:0 1 auto;}
-  .hero-cta{flex:0 0 200px; max-width:210px;}
+  .hero-row{
+    display:grid; grid-template-columns:220px 1fr 220px; align-items:center; gap:20px;
+    max-width:1180px; margin:0 auto; padding:0 24px;
+  }
+  .hero-center{justify-self:center; text-align:center;}
+  .hero-cta{max-width:210px;}
+  .hero-cta.gift{justify-self:start;}
+  .hero-cta.discord{justify-self:end;}
   .hero-cta a{display:block; text-align:center; padding:13px 12px; border-radius:var(--radius);
     font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.05em;
     text-transform:uppercase; border:1.5px solid var(--border); line-height:1.4;}
@@ -93,8 +98,8 @@
   .hero-cta.discord a{border-color:#5865F2; color:#5865F2;}
   .hero-cta.discord a:hover{background:rgba(88,101,242,0.08);}
   @media (max-width:900px){
-    .hero-row{flex-direction:column;}
-    .hero-cta{width:100%; max-width:320px;}
+    .hero-row{grid-template-columns:1fr; justify-items:center;}
+    .hero-cta{width:100%; max-width:320px; justify-self:center;}
   }
 
   .live-banner{max-width:1180px; margin:26px auto 0; padding:0 24px;}
@@ -110,8 +115,8 @@
   .nametag-panel button{flex:none; padding:10px 20px; border-radius:var(--radius); background:var(--ink); color:#fff; border:none; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer;}
   .nametag-status{font-size:11px; color:var(--blue); flex-basis:100%;}
 
-  .prizes-section{max-width:1180px; margin:26px auto 0; padding:0 24px;}
-  .prize-tiers{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .prizes-section{max-width:885px; margin:26px auto 0; padding:0 24px;}
+  .prize-tiers{display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;}
   @media (max-width:900px){.prize-tiers{grid-template-columns:1fr;}}
   .prize-tier{background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:22px; text-align:center;}
   .prize-tier .imgs{display:flex; gap:10px; justify-content:center; margin-bottom:14px;}
@@ -138,7 +143,7 @@
   .twitch-btn:hover{background:#7c34e6;}
 
   .wrap{max-width:1180px; margin:0 auto; padding:0 24px 80px; display:none;}
-  .layout{display:grid; grid-template-columns:220px 1fr 220px; gap:22px; align-items:start;}
+  .layout{display:grid; grid-template-columns:220px 1fr 220px; gap:22px; align-items:stretch;}
   .panel{background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:20px;}
   .panel-title{
     font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:13px; letter-spacing:0.18em;
@@ -161,6 +166,8 @@
   .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
   .faq-item.open .faq-a{max-height:160px;}
   .faq-a p{margin:0 0 14px 26px; font-size:12px; color:var(--ink-soft); line-height:1.5;}
+  .faq-a ul, .faq-a ol{margin:0 0 14px 26px; padding-left:16px; font-size:12px; color:var(--ink-soft); line-height:1.6;}
+  .faq-a li{margin-bottom:2px;}
 
   .bracket-col{display:flex; flex-direction:column; gap:22px; min-width:0;}
   .round-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px 20px; position:relative;}
@@ -321,24 +328,39 @@
       <p class="panel-title red">FAQ</p>
       <div id="faqList">
         <div class="faq-item open">
-          <button class="faq-q"><span class="num">1</span><span>What is a Chamber round?</span><span class="chev">+</span></button>
-          <div class="faq-a"><p>A 1v1 build-fight set, host's map, no item restrictions.</p></div>
+          <button class="faq-q"><span class="num">1</span><span>How do I join?</span><span class="chev">+</span></button>
+          <div class="faq-a">
+            <ol>
+              <li>Launch Fortnite.</li>
+              <li>Go to Settings → Game → Language and Region → Matchmaking Region → NA East.</li>
+              <li>Return to the Main Lobby.</li>
+              <li>Scroll down and select Custom Key.</li>
+              <li>Enter the tournament code and click Accept.</li>
+              <li>Select Battle Royale → Zero Build → Solo.</li>
+              <li>Ready Up.</li>
+            </ol>
+          </div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span class="num">2</span><span>How do I unlock a round?</span><span class="chev">+</span></button>
-          <div class="faq-a"><p>Gift 5+ subs to unlock whichever round is currently live, 10+ unlocks it plus the next one, and so on up to 4 rounds forward.</p></div>
+          <button class="faq-q"><span class="num">2</span><span>Why do I need to use NA East?</span><span class="chev">+</span></button>
+          <div class="faq-a"><p>Everyone needs to be on NA East so they can successfully join the lobby. You may experience higher ping, but NA East is required.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span class="num">3</span><span>How do I claim my code?</span><span class="chev">+</span></button>
-          <div class="faq-a"><p>Once you qualify, wait for a mod to open that round after the previous game wraps, then hit Claim.</p></div>
+          <button class="faq-q"><span class="num">3</span><span>How do I know I'm in?</span><span class="chev">+</span></button>
+          <div class="faq-a"><p>After you Ready Up, you should see the number of players queued. If you see that, just wait for the host to start the match.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span class="num">4</span><span>I missed the cutoff. Now what?</span><span class="chev">+</span></button>
-          <div class="faq-a"><p>Only the first 95 gifters per round get a seat. Miss it and that round's closed — but you can still land later rounds.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span class="num">5</span><span>What about Round 5 and the Final?</span><span class="chev">+</span></button>
-          <div class="faq-a"><p>Both are free-for-all — open to everyone once a mod unlocks them, no gifting required.</p></div>
+          <button class="faq-q"><span class="num">4</span><span>The code isn't working. What should I do?</span><span class="chev">+</span></button>
+          <div class="faq-a">
+            <p style="margin-bottom:8px;">First, double-check:</p>
+            <ul>
+              <li>You're on NA East,</li>
+              <li>You're using Battle Royale → Zero Build → Solo,</li>
+              <li>You've entered the code correctly,</li>
+              <li>Restart Fortnite and try again.</li>
+            </ul>
+            <p>We'll do our best to help. If you're unable to join, your entry can be rolled over to the next round.</p>
+          </div>
         </div>
       </div>
     </aside>
@@ -365,6 +387,12 @@
         <h4>Round Winner</h4>
         <div class="desc">Lifetime Discord VIP</div>
         <div class="winner-names" id="roundWinnersList"></div>
+      </div>
+      <div class="prize-tier">
+        <div class="imgs"><img src="christina.png" alt="Christina's Killer prize"></div>
+        <h4>Christina's Killer</h4>
+        <div class="desc">$25</div>
+        <div class="winner-names" id="killerWinnerList"></div>
       </div>
       <div class="prize-tier">
         <div class="imgs">
@@ -570,6 +598,9 @@ function renderPrizeWinners(){
 
   const finalList = document.getElementById('finalWinnerList');
   finalList.innerHTML = `<div class="wn-row"><span>Final</span><b>${escapeHtml(pw.final || '—')}</b></div>`;
+
+  const killerList = document.getElementById('killerWinnerList');
+  killerList.innerHTML = `<div class="wn-row"><span>Killer</span><b>${escapeHtml(pw.killer || '—')}</b></div>`;
 }
 
 function reveal(i){
