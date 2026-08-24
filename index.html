@@ -82,11 +82,45 @@
   }
   .game-wordmark span{color:var(--ink);}
 
-  .status-bar{
-    text-align:center; margin-top:18px; font-family:'Space Grotesk', sans-serif;
-    font-size:12px; letter-spacing:0.08em; color:var(--ink-soft); text-transform:uppercase;
+  .hero-row{display:flex; align-items:center; justify-content:center; gap:28px; flex-wrap:wrap; padding:0 20px;}
+  .hero-center{flex:0 1 auto;}
+  .hero-cta{flex:0 0 200px; max-width:210px;}
+  .hero-cta a{display:block; text-align:center; padding:13px 12px; border-radius:var(--radius);
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.05em;
+    text-transform:uppercase; border:1.5px solid var(--border); line-height:1.4;}
+  .hero-cta.gift a{border-color:var(--red); color:var(--red);}
+  .hero-cta.gift a:hover{background:var(--red-tint);}
+  .hero-cta.discord a{border-color:#5865F2; color:#5865F2;}
+  .hero-cta.discord a:hover{background:rgba(88,101,242,0.08);}
+  @media (max-width:900px){
+    .hero-row{flex-direction:column;}
+    .hero-cta{width:100%; max-width:320px;}
   }
-  .status-bar b{color:var(--ink);}
+
+  .live-banner{max-width:1180px; margin:26px auto 0; padding:0 24px;}
+  .live-banner-inner{background:var(--ink); border-radius:var(--radius); padding:13px 20px; text-align:center;}
+  .live-banner-inner span{font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:0.1em; font-size:13px; text-transform:uppercase; color:#fff;}
+  .live-banner-inner .dot{display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--red); margin-right:10px; animation:pulse 1.4s ease infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+  .nametag-panel{background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius);
+    padding:18px 20px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:22px;}
+  .nametag-panel label{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); flex:none;}
+  .nametag-panel input{flex:1; min-width:200px; padding:10px 12px; border:1.5px solid var(--border-soft); border-radius:var(--radius); font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ink);}
+  .nametag-panel button{flex:none; padding:10px 20px; border-radius:var(--radius); background:var(--ink); color:#fff; border:none; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer;}
+  .nametag-status{font-size:11px; color:var(--blue); flex-basis:100%;}
+
+  .prizes-section{max-width:1180px; margin:26px auto 0; padding:0 24px;}
+  .prize-tiers{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:900px){.prize-tiers{grid-template-columns:1fr;}}
+  .prize-tier{background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:22px; text-align:center;}
+  .prize-tier .imgs{display:flex; gap:10px; justify-content:center; margin-bottom:14px;}
+  .prize-tier img{max-width:140px; max-height:140px; object-fit:contain; border:1px solid var(--border-soft); border-radius:var(--radius);}
+  .prize-tier h4{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:15px; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px;}
+  .prize-tier .desc{font-size:12px; color:var(--ink-soft); margin-bottom:14px;}
+  .prize-tier .winner-names{border-top:1px dashed var(--border-soft); padding-top:12px; font-size:12px; text-align:left;}
+  .prize-tier .wn-row{display:flex; justify-content:space-between; padding:3px 0; color:var(--ink-soft);}
+  .prize-tier .wn-row b{color:var(--ink); font-family:'Space Grotesk', sans-serif;}
 
   .login-wrap{max-width:420px; margin:36px auto 0; text-align:center;}
   .login-panel{
@@ -242,14 +276,27 @@
 </div>
 
 <div class="hero">
-  <h1 class="title">IT'S NOT A PHASE</h1>
-  <div class="sub-row">
-    <svg class="orb" viewBox="0 0 60 60"><circle cx="30" cy="30" r="24"/><ellipse cx="30" cy="30" rx="10" ry="24"/><path d="M6 30 h48"/><path d="M9 18 h42"/><path d="M9 42 h42"/></svg>
-    <div class="eyebrow-line">Chamber Tournaments</div>
-    <svg class="orb" viewBox="0 0 60 60"><circle cx="30" cy="30" r="24"/><ellipse cx="30" cy="30" rx="10" ry="24"/><path d="M6 30 h48"/><path d="M9 18 h42"/><path d="M9 42 h42"/></svg>
+  <div class="hero-row">
+    <div class="hero-cta gift">
+      <a href="https://www.twitch.tv/subs/christinaandamber" target="_blank" rel="noopener">Gift 5 subs to enter the round</a>
+    </div>
+    <div class="hero-center">
+      <h1 class="title">IT'S NOT A PHASE</h1>
+      <div class="sub-row">
+        <svg class="orb" viewBox="0 0 60 60"><circle cx="30" cy="30" r="24"/><ellipse cx="30" cy="30" rx="10" ry="24"/><path d="M6 30 h48"/><path d="M9 18 h42"/><path d="M9 42 h42"/></svg>
+        <div class="eyebrow-line">Chamber Tournaments</div>
+        <svg class="orb" viewBox="0 0 60 60"><circle cx="30" cy="30" r="24"/><ellipse cx="30" cy="30" rx="10" ry="24"/><path d="M6 30 h48"/><path d="M9 18 h42"/><path d="M9 42 h42"/></svg>
+      </div>
+      <div class="game-wordmark"><span>FORT</span>NITE</div>
+    </div>
+    <div class="hero-cta discord">
+      <a href="https://discord.com/invite/christinaandamber" target="_blank" rel="noopener">Join Chamber Discord</a>
+    </div>
   </div>
-  <div class="game-wordmark"><span>FORT</span>NITE</div>
-  <div class="status-bar" id="statusBar" style="display:none;"></div>
+</div>
+
+<div class="live-banner" id="liveBanner" style="display:none;">
+  <div class="live-banner-inner"><span id="liveBannerText"><span class="dot"></span>Round 1 is now open</span></div>
 </div>
 
 <div class="login-wrap" id="loginWrap">
@@ -260,9 +307,16 @@
 </div>
 
 <div class="wrap" id="wrap">
+
+  <div class="nametag-panel">
+    <label for="nametagInput">Fortnite name</label>
+    <input type="text" id="nametagInput" placeholder="Your exact in-game name" />
+    <button onclick="saveNametag()">Save</button>
+    <div class="nametag-status" id="nametagStatus"></div>
+  </div>
+
   <div class="layout">
 
-    <div class="left-col">
     <aside class="panel" id="faq">
       <p class="panel-title red">FAQ</p>
       <div id="faqList">
@@ -289,40 +343,8 @@
       </div>
     </aside>
 
-    <aside class="panel" id="prizes">
-      <p class="panel-title">Prizes</p>
-      <div class="prize-block">
-        <h4>Each Round</h4>
-        <ul>
-          <li><b>1st</b><span>VIP Discord</span></li>
-          <li><b>2nd</b><span>VIP Discord</span></li>
-          <li><b>3rd</b><span>VIP Discord</span></li>
-        </ul>
-      </div>
-      <div class="prize-block">
-        <h4>Killed C/A</h4>
-        <ul><li><span>$25</span></li></ul>
-      </div>
-      <div class="prize-block">
-        <h4>Finals Winner</h4>
-        <ul><li><span>$250 + merch</span></li></ul>
-      </div>
-    </aside>
-    </div>
-
     <div class="bracket-col" id="bracket">
       <div class="round-grid" id="roundGrid"></div>
-
-      <div class="panel winners-panel" id="winners">
-        <p class="panel-title">Winners</p>
-        <div class="winners-grid">
-          <div class="winner-chip"><div class="r">Round 1</div><div class="u">username</div></div>
-          <div class="winner-chip"><div class="r">Round 2</div><div class="u">username</div></div>
-          <div class="winner-chip"><div class="r">Round 3</div><div class="u">username</div></div>
-          <div class="winner-chip"><div class="r">Round 4</div><div class="u">username</div></div>
-          <div class="winner-chip"><div class="r">Round 5</div><div class="u">username</div></div>
-        </div>
-      </div>
     </div>
 
     <aside class="panel">
@@ -334,6 +356,26 @@
       <div class="qual-round"><h4>Round 5</h4><ol><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
     </aside>
 
+  </div>
+
+  <div class="prizes-section">
+    <div class="prize-tiers">
+      <div class="prize-tier">
+        <div class="imgs"><img src="round.png" alt="Round winner prize"></div>
+        <h4>Round Winner</h4>
+        <div class="desc">Lifetime Discord VIP</div>
+        <div class="winner-names" id="roundWinnersList"></div>
+      </div>
+      <div class="prize-tier">
+        <div class="imgs">
+          <img src="winner_front.png" alt="Final winner merch front">
+          <img src="winner_back.png" alt="Final winner merch back">
+        </div>
+        <h4>Final Winner</h4>
+        <div class="desc">$250 and Chamber x Fortnite Merch</div>
+        <div class="winner-names" id="finalWinnerList"></div>
+      </div>
+    </div>
   </div>
 
   <footer>Chamber Tournaments · It's Not A Phase</footer>
@@ -406,11 +448,27 @@ async function fetchUser(token){
       currentDisplay = data.data[0].display_name;
       document.getElementById('loginWrap').style.display = 'none';
       document.getElementById('wrap').style.display = 'block';
+      loadNametag();
       startListening();
     }
   }catch(e){
     alert('Login failed, try again.');
   }
+}
+
+function loadNametag(){
+  fbDb.ref('nametags/' + currentUser).once('value').then((snap) => {
+    if(snap.exists()) document.getElementById('nametagInput').value = snap.val();
+  });
+}
+
+function saveNametag(){
+  const val = document.getElementById('nametagInput').value.trim();
+  const statusEl = document.getElementById('nametagStatus');
+  if(!val){ statusEl.textContent = 'Enter a name first.'; return; }
+  fbDb.ref('nametags/' + currentUser).set(val)
+    .then(() => { statusEl.textContent = '✅ Saved.'; })
+    .catch((e) => { statusEl.textContent = '❌ Could not save: ' + e.message; });
 }
 
 function startListening(){
@@ -442,8 +500,7 @@ function render(){
   if(!tournamentData || !currentUser) return;
   const count = tournamentData.eligibility[currentUser] || 0;
 
-  document.getElementById('statusBar').style.display = 'block';
-  document.getElementById('statusBar').innerHTML = `Logged in as <b>${escapeHtml(currentDisplay)}</b> — <b>${count}</b> gifted subs`;
+  updateLiveBanner();
 
   // Rounds 1-4: laddered, per-user qualified list
   (tournamentData.rounds || []).forEach((r, i) => {
@@ -483,6 +540,36 @@ function render(){
   } else {
     fbtnwrap.innerHTML = `<button class="claim-btn trophy" disabled style="opacity:.55;">${TROPHY_ICON}Claim</button>`;
   }
+
+  renderPrizeWinners();
+}
+
+function updateLiveBanner(){
+  const openNames = [];
+  (tournamentData.rounds || []).forEach((r) => { if(r.open) openNames.push(r.name); });
+  if(tournamentData.round5 && tournamentData.round5.open) openNames.push('Round 5');
+  if(tournamentData.finals && tournamentData.finals.open) openNames.push('The Final');
+
+  const banner = document.getElementById('liveBanner');
+  const text = document.getElementById('liveBannerText');
+  if(openNames.length === 0){
+    banner.style.display = 'none';
+    return;
+  }
+  banner.style.display = 'block';
+  text.innerHTML = `<span class="dot"></span>${escapeHtml(openNames.join(' & '))} now open`;
+}
+
+function renderPrizeWinners(){
+  const pw = tournamentData.prizeWinners || {};
+  const roundNames = pw.round || [];
+  const roundList = document.getElementById('roundWinnersList');
+  roundList.innerHTML = [0,1,2,3].map(i =>
+    `<div class="wn-row"><span>Round ${i+1}</span><b>${escapeHtml(roundNames[i] || '—')}</b></div>`
+  ).join('');
+
+  const finalList = document.getElementById('finalWinnerList');
+  finalList.innerHTML = `<div class="wn-row"><span>Final</span><b>${escapeHtml(pw.final || '—')}</b></div>`;
 }
 
 function reveal(i){
