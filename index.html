@@ -655,13 +655,14 @@ function render(){
     r5btnwrap.innerHTML = `<button class="claim-btn" disabled>${LOCK_ICON}Claim</button>`;
   }
 
-  // Final: free-for-all, trophy style
+  // Final: manually curated only — no automatic gifting access
+  const finalsQualified = ((tournamentData.finals || {}).qualified || []).includes(currentUser);
   const finalsOpen = !!(tournamentData.finals || {}).open && !!(tournamentData.finals || {}).code;
   const isFinalLive = tournamentData.currentRound === 'final';
   const fbtnwrap = document.getElementById('btnwrap-final');
   if(revealedRounds.has('final')){
     fbtnwrap.innerHTML = `<div class="code-box">${escapeHtml((tournamentData.finals || {}).code || 'Code not set yet — ask a mod')}</div>`;
-  } else if(finalsOpen){
+  } else if(finalsOpen && finalsQualified){
     fbtnwrap.innerHTML = `<button class="claim-btn trophy" onclick="revealFinals()">${TROPHY_ICON}Claim</button>`;
   } else {
     const dimStyle = isFinalLive ? '' : 'opacity:.55;';
