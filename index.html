@@ -126,6 +126,8 @@
   .prize-tier .winner-names{border-top:1px dashed var(--border-soft); padding-top:12px; font-size:12px; text-align:left;}
   .prize-tier .wn-row{display:flex; justify-content:space-between; padding:3px 0; color:var(--ink-soft);}
   .prize-tier .wn-row b{color:var(--ink); font-family:'Space Grotesk', sans-serif;}
+  .prize-tier .final-winner-big{text-align:center; padding:14px 4px;}
+  .prize-tier .final-winner-big b{display:block; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:22px; color:var(--ink);}
 
   .login-wrap{max-width:420px; margin:36px auto 0; text-align:center;}
   .login-panel{
@@ -585,8 +587,8 @@ function renderWinnersPanel(){
     { r: 'Round 2', u: roundNames[1] },
     { r: 'Round 3', u: roundNames[2] },
     { r: 'Round 4', u: roundNames[3] },
-    { r: 'Final', u: pw.final },
-    { r: "Christina's Killer", u: pw.killer }
+    { r: 'Round 5', u: pw.round5 },
+    { r: 'Final', u: pw.final }
   ];
   document.getElementById('winnersGrid').innerHTML = entries.map(e =>
     `<div class="winner-chip"><div class="r">${escapeHtml(e.r)}</div><div class="u">${escapeHtml(e.u || '—')}</div></div>`
@@ -617,11 +619,14 @@ function renderPrizeWinners(){
     `<div class="wn-row"><span>Round ${i+1}</span><b>${escapeHtml(roundNames[i] || '—')}</b></div>`
   ).join('');
 
-  const finalList = document.getElementById('finalWinnerList');
-  finalList.innerHTML = `<div class="wn-row"><span>Final</span><b>${escapeHtml(pw.final || '—')}</b></div>`;
-
+  const killerNames = pw.killer || [];
   const killerList = document.getElementById('killerWinnerList');
-  killerList.innerHTML = `<div class="wn-row"><span>Killer</span><b>${escapeHtml(pw.killer || '—')}</b></div>`;
+  killerList.innerHTML = [0,1,2,3].map(i =>
+    `<div class="wn-row"><span>Killer Round ${i+1}</span><b>${escapeHtml(killerNames[i] || '—')}</b></div>`
+  ).join('');
+
+  const finalList = document.getElementById('finalWinnerList');
+  finalList.innerHTML = `<div class="final-winner-big"><b>${escapeHtml(pw.final || '—')}</b></div>`;
 }
 
 function reveal(i){
