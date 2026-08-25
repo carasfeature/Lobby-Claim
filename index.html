@@ -87,7 +87,7 @@
     max-width:1180px; margin:0 auto; padding:0 24px;
   }
   .hero-center{justify-self:center; text-align:center;}
-  .hero-cta{max-width:210px;}
+  .hero-cta{max-width:210px; display:none;}
   .hero-cta.gift{justify-self:start;}
   .hero-cta.discord{justify-self:end;}
   .hero-cta a{display:block; text-align:center; padding:13px 12px; border-radius:var(--radius);
@@ -480,6 +480,7 @@ async function fetchUser(token){
       currentDisplay = data.data[0].display_name;
       document.getElementById('loginWrap').style.display = 'none';
       document.getElementById('wrap').style.display = 'block';
+      document.querySelectorAll('.hero-cta').forEach(el => el.style.display = 'block');
       loadNametag();
       startListening();
     }
@@ -591,6 +592,7 @@ function renderWinnersPanel(){
   document.getElementById('winnersGrid').innerHTML = entries.map(e =>
     `<div class="winner-chip"><div class="r">${escapeHtml(e.r)}</div><div class="u">${escapeHtml(e.u || '—')}</div></div>`
   ).join('');
+}
 
 function updateLiveBanner(){
   const openNames = [];
