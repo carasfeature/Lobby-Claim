@@ -530,7 +530,7 @@ function buildRoundGrid(){
 
 function render(){
   if(!tournamentData || !currentUser) return;
-  const count = tournamentData.eligibility[currentUser] || 0;
+  const count = (tournamentData.eligibility || {})[currentUser] || 0;
 
   updateLiveBanner();
 
@@ -563,10 +563,10 @@ function render(){
   }
 
   // Final: free-for-all, trophy style
-  const finalsOpen = !!tournamentData.finals.open && !!tournamentData.finals.code;
+  const finalsOpen = !!(tournamentData.finals || {}).open && !!(tournamentData.finals || {}).code;
   const fbtnwrap = document.getElementById('btnwrap-final');
   if(revealedRounds.has('final')){
-    fbtnwrap.innerHTML = `<div class="code-box">${escapeHtml(tournamentData.finals.code)}</div>`;
+    fbtnwrap.innerHTML = `<div class="code-box">${escapeHtml((tournamentData.finals || {}).code || 'Code not set yet — ask a mod')}</div>`;
   } else if(finalsOpen){
     fbtnwrap.innerHTML = `<button class="claim-btn trophy" onclick="revealFinals()">${TROPHY_ICON}Claim</button>`;
   } else {
