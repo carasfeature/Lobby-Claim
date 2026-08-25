@@ -367,6 +367,10 @@
 
     <div class="bracket-col" id="bracket">
       <div class="round-grid" id="roundGrid"></div>
+      <div class="panel winners-panel">
+        <p class="panel-title">Winners</p>
+        <div class="winners-grid" id="winnersGrid"></div>
+      </div>
     </div>
 
     <aside class="panel">
@@ -570,7 +574,23 @@ function render(){
   }
 
   renderPrizeWinners();
+  renderWinnersPanel();
 }
+
+function renderWinnersPanel(){
+  const pw = tournamentData.prizeWinners || {};
+  const roundNames = pw.round || [];
+  const entries = [
+    { r: 'Round 1', u: roundNames[0] },
+    { r: 'Round 2', u: roundNames[1] },
+    { r: 'Round 3', u: roundNames[2] },
+    { r: 'Round 4', u: roundNames[3] },
+    { r: 'Final', u: pw.final },
+    { r: "Christina's Killer", u: pw.killer }
+  ];
+  document.getElementById('winnersGrid').innerHTML = entries.map(e =>
+    `<div class="winner-chip"><div class="r">${escapeHtml(e.r)}</div><div class="u">${escapeHtml(e.u || '—')}</div></div>`
+  ).join('');
 
 function updateLiveBanner(){
   const openNames = [];
