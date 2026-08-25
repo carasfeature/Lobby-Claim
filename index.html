@@ -87,9 +87,11 @@
     max-width:1180px; margin:0 auto; padding:0 24px;
   }
   .hero-center{justify-self:center; text-align:center; grid-column:2;}
-  .hero-cta{max-width:210px; display:none;}
-  .hero-cta.gift{justify-self:start; grid-column:1;}
-  .hero-cta.discord{justify-self:end; grid-column:3;}
+  .hero-side{grid-column:1; display:flex; flex-direction:column; gap:8px; align-items:flex-start;}
+  .hero-side.discord-side{grid-column:3; align-items:flex-end;}
+  .hero-cta{max-width:210px; display:none; width:100%;}
+  .hero-info{font-family:'Space Grotesk', sans-serif; font-size:11.5px; font-weight:600; color:var(--ink-soft); letter-spacing:0.03em; text-align:left;}
+  .hero-side.discord-side .hero-info{text-align:right;}
   .hero-cta a{display:block; text-align:center; padding:13px 12px; border-radius:var(--radius);
     font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.05em;
     text-transform:uppercase; border:1.5px solid var(--border); line-height:1.4;}
@@ -99,7 +101,9 @@
   .hero-cta.discord a:hover{background:rgba(88,101,242,0.08);}
   @media (max-width:900px){
     .hero-row{grid-template-columns:1fr; justify-items:center;}
-    .hero-cta{width:100%; max-width:320px; justify-self:center;}
+    .hero-side{grid-column:1; align-items:center; width:100%; max-width:320px;}
+    .hero-side.discord-side{align-items:center;}
+    .hero-info{text-align:center !important;}
   }
 
   .live-banner{max-width:1180px; margin:26px auto 0; padding:0 24px;}
@@ -108,11 +112,15 @@
   .live-banner-inner .dot{display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--red); margin-right:10px; animation:pulse 1.4s ease infinite;}
   @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 
-  .nametag-panel{background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius);
-    padding:18px 20px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:22px;}
-  .nametag-panel label{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); flex:none;}
-  .nametag-panel input{flex:1; min-width:200px; padding:10px 12px; border:1.5px solid var(--border-soft); border-radius:var(--radius); font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ink);}
-  .nametag-panel button{flex:none; padding:10px 20px; border-radius:var(--radius); background:var(--ink); color:#fff; border:none; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer;}
+  .nametag-panel{background:var(--card); border:2px solid var(--red); border-radius:var(--radius);
+    padding:20px 22px; margin-bottom:22px;}
+  .nametag-heading{font-family:'Archivo Black', sans-serif; font-size:19px; text-transform:uppercase;
+    color:var(--red); letter-spacing:0.01em; margin-bottom:5px;}
+  .nametag-sub{font-size:12px; color:var(--ink-soft); margin-bottom:14px; line-height:1.4;}
+  .nametag-row{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+  .nametag-panel input{flex:1; min-width:200px; padding:12px 14px; border:1.5px solid var(--border-soft); border-radius:var(--radius); font-family:'IBM Plex Mono', monospace; font-size:14px; font-weight:600; color:var(--ink);}
+  .nametag-panel button{flex:none; padding:12px 22px; border-radius:var(--radius); background:var(--red); color:#fff; border:none; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer;}
+  .nametag-panel button:hover{background:#c73226;}
   .nametag-status{font-size:11px; color:var(--blue); flex-basis:100%;}
 
   .prizes-section{max-width:1180px; margin:26px auto 0; padding:0 24px;}
@@ -182,6 +190,13 @@
   @keyframes draw{to{stroke-dashoffset:0;}}
 
   .round-card{background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:16px; position:relative; z-index:1;}
+  .round-card.live-now{animation:live-glow 1.6s ease-in-out infinite;}
+  @keyframes live-glow{
+    0%,100%{box-shadow:0 0 0 0 rgba(226,59,46,0.45); border-color:var(--red);}
+    50%{box-shadow:0 0 14px 3px rgba(226,59,46,0.55); border-color:var(--red);}
+  }
+  .spots-left{font-size:11px; color:var(--ink-soft); text-align:center; margin-top:8px; font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:0.03em;}
+  .spots-left.full{color:var(--red); font-weight:700;}
   .round-card.final{grid-column:2; background:var(--ink); border-color:var(--ink);}
   .round-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
   .round-head h3{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:15px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink);}
@@ -285,8 +300,11 @@
 
 <div class="hero">
   <div class="hero-row">
-    <div class="hero-cta gift">
-      <a href="https://www.twitch.tv/subs/christinaandamber" target="_blank" rel="noopener">Gift 5 subs to enter the round</a>
+    <div class="hero-side gift-side">
+      <div class="hero-cta gift">
+        <a href="https://www.twitch.tv/subs/christinaandamber" target="_blank" rel="noopener">Gift 5 subs to enter</a>
+      </div>
+      <div class="hero-info" id="totalGiftedInfo">Loading total gifts…</div>
     </div>
     <div class="hero-center">
       <h1 class="title">IT'S NOT A PHASE</h1>
@@ -297,8 +315,11 @@
       </div>
       <div class="game-wordmark"><span>FORT</span>NITE</div>
     </div>
-    <div class="hero-cta discord">
-      <a href="https://discord.com/invite/christinaandamber" target="_blank" rel="noopener">Join Chamber Discord</a>
+    <div class="hero-side discord-side">
+      <div class="hero-cta discord">
+        <a href="https://discord.com/invite/christinaandamber" target="_blank" rel="noopener">Join Chamber Discord</a>
+      </div>
+      <div class="hero-info" id="countdownInfo">Loading…</div>
     </div>
   </div>
 </div>
@@ -317,9 +338,12 @@
 <div class="wrap" id="wrap">
 
   <div class="nametag-panel">
-    <label for="nametagInput">Fortnite name</label>
-    <input type="text" id="nametagInput" placeholder="Your exact in-game name" />
-    <button onclick="saveNametag()">Save</button>
+    <div class="nametag-heading">⚠️ Enter Your Fortnite Name</div>
+    <div class="nametag-sub">Required to get into the lobby — we match this to your Twitch account to invite you. Double-check your spelling.</div>
+    <div class="nametag-row">
+      <input type="text" id="nametagInput" placeholder="Your exact in-game name" />
+      <button onclick="saveNametag()">Save</button>
+    </div>
     <div class="nametag-status" id="nametagStatus"></div>
   </div>
 
@@ -376,11 +400,11 @@
 
     <aside class="panel">
       <p class="panel-title blue">Qualified<br>For Finals</p>
-      <div class="qual-round"><h4>Round 1</h4><ol><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
-      <div class="qual-round"><h4>Round 2</h4><ol><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
-      <div class="qual-round"><h4>Round 3</h4><ol><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
-      <div class="qual-round"><h4>Round 4</h4><ol><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
-      <div class="qual-round"><h4>Round 5</h4><ol><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+      <div class="qual-round"><h4>Round 1</h4><ol id="qual-list-0"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+      <div class="qual-round"><h4>Round 2</h4><ol id="qual-list-1"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+      <div class="qual-round"><h4>Round 3</h4><ol id="qual-list-2"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+      <div class="qual-round"><h4>Round 4</h4><ol id="qual-list-3"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+      <div class="qual-round"><h4>Round 5</h4><ol id="qual-list-4"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
     </aside>
 
   </div>
@@ -459,6 +483,9 @@ async function init(){
     });
   });
 
+  startCountdown();
+  startListening();
+
   const hash = window.location.hash;
   if(hash.includes('access_token')){
     const params = new URLSearchParams(hash.slice(1));
@@ -468,6 +495,27 @@ async function init(){
       history.replaceState(null, '', window.location.pathname);
     }
   }
+}
+
+function startCountdown(){
+  const target = new Date('2026-08-30T14:00:00-04:00').getTime(); // Aug 30 2026, 2PM Eastern
+  const el = document.getElementById('countdownInfo');
+  let timer;
+  function tick(){
+    if(!el) return;
+    const diff = target - Date.now();
+    if(diff <= 0){
+      el.textContent = '🔴 Tournament is LIVE!';
+      if(timer) clearInterval(timer);
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    el.textContent = `Starts in ${d}d ${h}h ${m}m`;
+  }
+  tick();
+  timer = setInterval(tick, 1000);
 }
 
 async function fetchUser(token){
@@ -483,7 +531,7 @@ async function fetchUser(token){
       document.getElementById('wrap').style.display = 'block';
       document.querySelectorAll('.hero-cta').forEach(el => el.style.display = 'block');
       loadNametag();
-      startListening();
+      if(tournamentData) render();
     }
   }catch(e){
     alert('Login failed, try again.');
@@ -509,10 +557,42 @@ function startListening(){
   fbDb.ref('tournament').on('value', (snapshot) => {
     tournamentData = snapshot.val();
     if(!tournamentData) return; // leave default locked buttons showing until data arrives
-    render();
+    updateLiveBanner();
+    updateTotalGiftedCounter();
+    updateRoundLiveIndicators();
+    if(currentUser) render();
   }, (error) => {
     console.error('Firebase read error:', error);
   });
+}
+
+function updateRoundLiveIndicators(){
+  const currentRoundNum = tournamentData.currentRound; // 1-4, whichever admin marked live
+  (tournamentData.rounds || []).forEach((r, i) => {
+    const card = document.getElementById('card-round-' + i);
+    const spotsEl = document.getElementById('spots-round-' + i);
+    const isCurrentLive = (i + 1) === currentRoundNum;
+
+    if(card) card.classList.toggle('live-now', isCurrentLive);
+    if(spotsEl){
+      if(isCurrentLive){
+        const filled = (r.qualified || []).length;
+        const cap = r.cap || 90;
+        spotsEl.textContent = `${filled}/${cap} claimed`;
+        spotsEl.className = 'spots-left' + (filled >= cap ? ' full' : '');
+      } else {
+        spotsEl.textContent = '';
+      }
+    }
+  });
+}
+
+function updateTotalGiftedCounter(){
+  const el = document.getElementById('totalGiftedInfo');
+  if(!el) return;
+  const elig = tournamentData.eligibility || {};
+  const total = Object.values(elig).reduce((a,b) => a + (b || 0), 0);
+  el.textContent = `🔥 ${total} subs gifted so far`;
 }
 
 function buildRoundGrid(){
@@ -521,6 +601,7 @@ function buildRoundGrid(){
     html += `<div class="round-card" id="card-round-${i}">
       <div class="round-head"><h3>Round ${i+1}</h3></div>
       <div id="btnwrap-round-${i}"><button class="claim-btn" disabled>${LOCK_ICON}Claim</button></div>
+      <div class="spots-left" id="spots-round-${i}"></div>
     </div>`;
   }
   html += `<div class="round-card final" id="card-final">
@@ -533,8 +614,6 @@ function buildRoundGrid(){
 function render(){
   if(!tournamentData || !currentUser) return;
   const count = (tournamentData.eligibility || {})[currentUser] || 0;
-
-  updateLiveBanner();
 
   // Rounds 1-4: laddered, per-user qualified list
   (tournamentData.rounds || []).forEach((r, i) => {
@@ -577,6 +656,18 @@ function render(){
 
   renderPrizeWinners();
   renderWinnersPanel();
+  renderQualifiers();
+}
+
+function renderQualifiers(){
+  const q = tournamentData.qualifiers || [];
+  for(let i = 0; i < 5; i++){
+    const list = document.getElementById('qual-list-' + i);
+    const names = q[i] || [];
+    list.innerHTML = [0,1,2].map(p =>
+      `<li><b>${p+1}</b>${escapeHtml(names[p] || '—')}</li>`
+    ).join('');
+  }
 }
 
 function renderWinnersPanel(){
