@@ -86,10 +86,10 @@
     display:grid; grid-template-columns:220px 1fr 220px; align-items:center; gap:20px;
     max-width:1180px; margin:0 auto; padding:0 24px;
   }
-  .hero-center{justify-self:center; text-align:center;}
+  .hero-center{justify-self:center; text-align:center; grid-column:2;}
   .hero-cta{max-width:210px; display:none;}
-  .hero-cta.gift{justify-self:start;}
-  .hero-cta.discord{justify-self:end;}
+  .hero-cta.gift{justify-self:start; grid-column:1;}
+  .hero-cta.discord{justify-self:end; grid-column:3;}
   .hero-cta a{display:block; text-align:center; padding:13px 12px; border-radius:var(--radius);
     font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.05em;
     text-transform:uppercase; border:1.5px solid var(--border); line-height:1.4;}
@@ -216,9 +216,8 @@
   .round-card.final .code-box{color:#fff; border-color:#555;}
 
   .winners-panel .panel-title{color:var(--ink);}
-  .winners-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
-  @media (max-width:560px){.winners-grid{grid-template-columns:repeat(2,1fr);}}
-  .winner-chip{background:var(--bg); border:1px dashed var(--border-soft); border-radius:var(--radius); padding:12px; text-align:center;}
+  .winners-grid{display:flex; flex-wrap:wrap; gap:12px; justify-content:center;}
+  .winner-chip{flex:1 1 200px; max-width:230px; background:var(--bg); border:1px dashed var(--border-soft); border-radius:var(--radius); padding:12px; text-align:center;}
   .winner-chip .r{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:11px; letter-spacing:0.12em; color:var(--ink-soft); text-transform:uppercase;}
   .winner-chip .u{font-size:13px; color:var(--blue); margin-top:6px; font-style:italic; opacity:0.85;}
   .winner-chip .u.full{color:var(--red);}
