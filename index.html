@@ -90,7 +90,7 @@
   .hero-side{grid-column:1; display:flex; flex-direction:column; gap:8px; align-items:flex-start;}
   .hero-side.discord-side{grid-column:3; align-items:flex-end;}
   .hero-cta{max-width:210px; display:none; width:100%;}
-  .hero-info{font-family:'Space Grotesk', sans-serif; font-size:11.5px; font-weight:600; color:var(--ink-soft); letter-spacing:0.03em; text-align:left;}
+  .hero-info{font-family:'Space Grotesk', sans-serif; font-size:23px; font-weight:700; color:var(--ink-soft); letter-spacing:0.02em; text-align:left; line-height:1.15; display:none;}
   .hero-side.discord-side .hero-info{text-align:right;}
   .hero-cta a{display:block; text-align:center; padding:13px 12px; border-radius:var(--radius);
     font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.05em;
@@ -192,8 +192,8 @@
   .round-card{background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:16px; position:relative; z-index:1;}
   .round-card.live-now{animation:live-glow 1.6s ease-in-out infinite;}
   @keyframes live-glow{
-    0%,100%{box-shadow:0 0 0 0 rgba(226,59,46,0.45); border-color:var(--red);}
-    50%{box-shadow:0 0 14px 3px rgba(226,59,46,0.55); border-color:var(--red);}
+    0%,100%{box-shadow:0 0 0 0 rgba(109,184,250,0.45); border-color:#6DB8FA;}
+    50%{box-shadow:0 0 14px 3px rgba(109,184,250,0.65); border-color:#6DB8FA;}
   }
   .spots-left{font-size:11px; color:var(--ink-soft); text-align:center; margin-top:8px; font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:0.03em;}
   .spots-left.full{color:var(--red); font-weight:700;}
@@ -530,6 +530,7 @@ async function fetchUser(token){
       document.getElementById('loginWrap').style.display = 'none';
       document.getElementById('wrap').style.display = 'block';
       document.querySelectorAll('.hero-cta').forEach(el => el.style.display = 'block');
+      document.querySelectorAll('.hero-info').forEach(el => el.style.display = 'block');
       loadNametag();
       if(tournamentData) render();
     }
@@ -567,7 +568,7 @@ function startListening(){
 }
 
 function updateRoundLiveIndicators(){
-  const currentRoundNum = tournamentData.currentRound; // 1-4, whichever admin marked live
+  const currentRoundNum = tournamentData.currentRound; // 1-5, 'final', or null/undefined if nothing active
   (tournamentData.rounds || []).forEach((r, i) => {
     const card = document.getElementById('card-round-' + i);
     const spotsEl = document.getElementById('spots-round-' + i);
@@ -585,6 +586,12 @@ function updateRoundLiveIndicators(){
       }
     }
   });
+
+  const r5card = document.getElementById('card-round-4');
+  if(r5card) r5card.classList.toggle('live-now', currentRoundNum === 5);
+
+  const finalCard = document.getElementById('card-final');
+  if(finalCard) finalCard.classList.toggle('live-now', currentRoundNum === 'final');
 }
 
 function updateTotalGiftedCounter(){
@@ -592,7 +599,7 @@ function updateTotalGiftedCounter(){
   if(!el) return;
   const elig = tournamentData.eligibility || {};
   const total = Object.values(elig).reduce((a,b) => a + (b || 0), 0);
-  el.textContent = `🔥 ${total} subs gifted so far`;
+  el.textContent = `${total} subs gifted so far`;
 }
 
 function buildRoundGrid(){
