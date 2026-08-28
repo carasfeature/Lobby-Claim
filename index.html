@@ -9,11 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#F4F4F1;
+    --bg:#F1ECDF;
     --card:#FFFFFF;
-    --ink:#1C1C1C;
+    --ink:#241F19;
     --ink-soft:#6B6B66;
-    --border:#1C1C1C;
+    --border:#241F19;
     --border-soft:#DEDBD2;
     --red:#E23B2E;
     --red-tint:rgba(226,59,46,0.08);
@@ -94,11 +94,12 @@
   .hero-side.discord-side .hero-info{text-align:right;}
   .hero-cta a{display:block; text-align:center; padding:13px 12px; border-radius:var(--radius);
     font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.05em;
-    text-transform:uppercase; border:1.5px solid var(--border); line-height:1.4;}
-  .hero-cta.gift a{border-color:var(--red); color:var(--red);}
-  .hero-cta.gift a:hover{background:var(--red-tint);}
-  .hero-cta.discord a{border-color:#5865F2; color:#5865F2;}
-  .hero-cta.discord a:hover{background:rgba(88,101,242,0.08);}
+    text-transform:uppercase; border:1.5px solid var(--border); line-height:1.4;
+    background:var(--ink); color:var(--bg);}
+  .hero-cta.gift a{border-color:#B8511F;}
+  .hero-cta.gift a:hover{background:#332C24;}
+  .hero-cta.discord a{border-color:#2B5C4A;}
+  .hero-cta.discord a:hover{background:#332C24;}
   @media (max-width:900px){
     .hero-row{grid-template-columns:1fr; justify-items:center;}
     .hero-center{grid-column:1;}
@@ -193,13 +194,13 @@
   .round-card{background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:16px; position:relative; z-index:1;}
   .round-card.live-now{animation:live-glow 1.6s ease-in-out infinite;}
   @keyframes live-glow{
-    0%,100%{box-shadow:0 0 0 0 rgba(109,184,250,0.45); border-color:#6DB8FA;}
-    50%{box-shadow:0 0 14px 3px rgba(109,184,250,0.65); border-color:#6DB8FA;}
+    0%,100%{box-shadow:0 0 0 0 rgba(102,0,0,0.45); border-color:#660000;}
+    50%{box-shadow:0 0 14px 3px rgba(102,0,0,0.65); border-color:#660000;}
   }
-  .round-card.final.live-now{animation:live-glow-red 1.6s ease-in-out infinite;}
-  @keyframes live-glow-red{
-    0%,100%{box-shadow:0 0 0 0 rgba(144,0,0,0.55); border-color:#900000;}
-    50%{box-shadow:0 0 14px 3px rgba(144,0,0,0.75); border-color:#900000;}
+  .round-card.final.live-now{animation:live-glow-final 1.6s ease-in-out infinite;}
+  @keyframes live-glow-final{
+    0%,100%{box-shadow:0 0 0 0 rgba(239,191,4,0.55); border-color:#EFBF04;}
+    50%{box-shadow:0 0 14px 3px rgba(239,191,4,0.75); border-color:#EFBF04;}
   }
   .spots-left{font-size:11px; color:var(--ink-soft); text-align:center; margin-top:8px; font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:0.03em;}
   .spots-left.full{color:var(--red); font-weight:700;}
@@ -208,14 +209,14 @@
   .round-head h3{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:15px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink);}
   .round-card.final .round-head h3{color:#fff;}
   .claim-btn{
-    width:100%; padding:14px 10px; border-radius:var(--radius); background:transparent;
-    border:1.5px solid var(--red); color:var(--red);
+    width:100%; padding:14px 10px; border-radius:var(--radius); background:var(--ink);
+    border:1.5px solid #660000; color:var(--bg);
     font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:0.1em; font-size:14px;
     text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:8px;
     cursor:pointer; transition:background .15s ease, color .15s ease;
   }
-  .claim-btn:hover:not(:disabled){background:var(--red-tint);}
-  .claim-btn.open{border-color:var(--blue); color:var(--blue);}
+  .claim-btn:hover:not(:disabled){background:#332C24;}
+  .claim-btn.open{background:transparent; border-color:var(--blue); color:var(--blue);}
   .claim-btn.open:hover{background:var(--blue-tint);}
   .claim-btn.trophy{border-color:#fff; background:#fff; color:var(--ink);}
   .claim-btn.trophy svg{color:var(--red);}
