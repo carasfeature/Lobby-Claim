@@ -154,6 +154,20 @@
   }
   .twitch-btn:hover{background:#7c34e6;}
 
+  .in-app-warning{
+    background:#FFF4E5; border:1.5px solid #E08A3E; border-radius:var(--radius);
+    padding:14px 16px; margin-bottom:16px; text-align:left; font-size:12.5px; color:#5c3d1a; line-height:1.5;
+  }
+  .copy-link-btn{
+    display:block; width:100%; margin-top:10px; padding:10px; border-radius:var(--radius);
+    background:#E08A3E; color:#fff; border:none; font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer;
+  }
+  .copy-link-btn:hover{background:#c9762f;}
+  .trouble-toggle{
+    margin-top:12px; font-size:11.5px; color:var(--ink-soft); text-decoration:underline; cursor:pointer;
+  }
+
   .wrap{max-width:1180px; margin:0 auto; padding:0 24px 80px; display:none;}
   .layout{display:grid; grid-template-columns:220px 1fr 220px; gap:22px; align-items:stretch;}
   .panel{background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:20px;}
@@ -333,8 +347,15 @@
 
 <div class="login-wrap" id="loginWrap">
   <div class="login-panel">
+    <div id="inAppWarning" class="in-app-warning" style="display:none;">
+      ⚠️ You're viewing this inside Twitch's own app browser — Twitch login won't complete here.<br>
+      Tap the <b>•••</b> or <b>share</b> icon above and choose <b>"Open in Browser"</b>, then come back and log in.
+      <button class="copy-link-btn" onclick="copyPageLink()">📋 Copy this link instead</button>
+      <div id="copyLinkStatus" style="font-size:11px; margin-top:4px;"></div>
+    </div>
     <p>Log in with Twitch to check your gifted sub total and claim your round.</p>
     <button class="twitch-btn" onclick="startLogin()">Login with Twitch</button>
+    <div id="troubleToggle" class="trouble-toggle" onclick="document.getElementById('inAppWarning').style.display='block'; this.style.display='none';">Login not working? Tap here</div>
   </div>
 </div>
 
@@ -450,7 +471,7 @@
 <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-database-compat.js"></script>
 <script>
 const CLIENT_ID = 'ube5lbxw2yje55kku6hckuturx6s0g';
-const REDIRECT_URI = 'https://carasfeature.github.io/chambergames/';
+const REDIRECT_URI = 'https://chambergames.app/';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAdx6UIx2mHwqbK4KPKnXolbgmUcCR1Wvg",
@@ -493,6 +514,7 @@ async function init(){
 
   startCountdown();
   startListening();
+  detectInAppBrowser();
 
   const hash = window.location.hash;
   if(hash.includes('access_token')){
@@ -503,6 +525,30 @@ async function init(){
       history.replaceState(null, '', window.location.pathname);
     }
   }
+}
+
+function detectInAppBrowser(){
+  const ua = navigator.userAgent || '';
+  // Known in-app browser signatures (Twitch, Instagram, TikTok, Facebook, Line, etc.)
+  // Best-effort only — the always-visible "Login not working?" toggle covers anything this misses.
+  const signatures = ['Twitch', 'Instagram', 'TikTok', 'FBAN', 'FBAV', 'Line/', 'MicroMessenger'];
+  const looksInApp = signatures.some(sig => ua.includes(sig));
+  if(looksInApp){
+    const warn = document.getElementById('inAppWarning');
+    const toggle = document.getElementById('troubleToggle');
+    if(warn) warn.style.display = 'block';
+    if(toggle) toggle.style.display = 'none';
+  }
+}
+
+function copyPageLink(){
+  const url = window.location.href.split('#')[0];
+  const statusEl = document.getElementById('copyLinkStatus');
+  navigator.clipboard.writeText(url).then(() => {
+    if(statusEl) statusEl.textContent = '✅ Copied! Paste it into Safari or Chrome.';
+  }).catch(() => {
+    if(statusEl) statusEl.textContent = url;
+  });
 }
 
 function startCountdown(){
