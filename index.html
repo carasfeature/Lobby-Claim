@@ -164,9 +164,6 @@
     font-weight:700; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer;
   }
   .copy-link-btn:hover{background:#c9762f;}
-  .trouble-toggle{
-    margin-top:12px; font-size:11.5px; color:var(--ink-soft); text-decoration:underline; cursor:pointer;
-  }
 
   .wrap{max-width:1180px; margin:0 auto; padding:0 24px 80px; display:none;}
   .layout{display:grid; grid-template-columns:220px 1fr 220px; gap:22px; align-items:stretch;}
@@ -355,7 +352,6 @@
     </div>
     <p>Log in with Twitch to check your gifted sub total and claim your round.</p>
     <button class="twitch-btn" onclick="startLogin()">Login with Twitch</button>
-    <div id="troubleToggle" class="trouble-toggle" onclick="document.getElementById('inAppWarning').style.display='block'; this.style.display='none';">Login not working? Tap here</div>
   </div>
 </div>
 
@@ -530,14 +526,12 @@ async function init(){
 function detectInAppBrowser(){
   const ua = navigator.userAgent || '';
   // Known in-app browser signatures (Twitch, Instagram, TikTok, Facebook, Line, etc.)
-  // Best-effort only — the always-visible "Login not working?" toggle covers anything this misses.
+  // Best-effort only — shows the warning banner automatically when detected.
   const signatures = ['Twitch', 'Instagram', 'TikTok', 'FBAN', 'FBAV', 'Line/', 'MicroMessenger'];
   const looksInApp = signatures.some(sig => ua.includes(sig));
   if(looksInApp){
     const warn = document.getElementById('inAppWarning');
-    const toggle = document.getElementById('troubleToggle');
     if(warn) warn.style.display = 'block';
-    if(toggle) toggle.style.display = 'none';
   }
 }
 
