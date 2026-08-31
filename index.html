@@ -137,14 +137,16 @@
   .menu-wrap{max-width:820px; margin:0 auto;}
 
   .menu-info-row{display:flex; gap:14px; max-width:820px; margin:0 auto 20px; flex-wrap:wrap;}
-  .countdown-panel, .discord-widget-panel{
-    flex:1 1 280px; background:var(--card); border:1.5px solid var(--border-soft); border-radius:var(--radius);
-    padding:18px 20px; text-align:center;
+  .countdown-panel, .discord-link-panel, .placeholder-mini-panel{
+    flex:1 1 220px; background:var(--card); border:1.5px solid var(--border-soft); border-radius:var(--radius);
+    padding:20px; text-align:center; display:block;
   }
   .countdown-label{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;}
-  .countdown-value{font-family:'Archivo Black', sans-serif; font-size:26px; text-transform:uppercase;}
-  .discord-widget-panel{padding:0; overflow:hidden;}
-  .discord-widget-panel iframe{display:block; width:100%; border:none;}
+  .countdown-stream-name{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:14px; margin-bottom:4px; color:var(--ink);}
+  .countdown-value{font-family:'Archivo Black', sans-serif; font-size:24px; text-transform:uppercase;}
+  .discord-link-panel:hover{border-color:var(--ink);}
+  .discord-link-title{font-family:'Archivo Black', sans-serif; font-size:18px; text-transform:uppercase; margin-top:6px;}
+  .placeholder-mini-panel{opacity:.4;}
 
   .menu-featured{
     display:block; width:100%; text-align:left; cursor:pointer;
@@ -165,15 +167,16 @@
     .featured-title{font-size:38px;}
   }
 
-  .menu-grid{display:flex; flex-direction:column; gap:14px;}
-  .menu-item{
-    display:flex; justify-content:space-between; align-items:center;
-    width:100%; padding:26px 30px; background:var(--card); border:1.5px solid var(--border-soft); border-radius:var(--radius);
-    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:19px; text-transform:uppercase; letter-spacing:0.03em;
-    color:var(--ink); cursor:pointer; text-align:left; transition:border-color .15s ease, background .15s ease;
+  .menu-secondary-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px;}
+  @media (max-width:560px){ .menu-secondary-grid{grid-template-columns:1fr;} }
+  .menu-featured-small{
+    display:block; width:100%; text-align:left; cursor:pointer;
+    background:var(--card); color:var(--ink); border:1.5px solid var(--card); border-radius:var(--radius);
+    padding:28px 26px; transition:transform .15s ease;
   }
-  .menu-item:hover{border-color:var(--ink); background:var(--bg);}
-  .menu-item .arrow{font-family:'Space Grotesk', sans-serif; font-size:17px; font-weight:700; color:var(--ink-soft);}
+  .menu-featured-small:hover{transform:translateY(-2px);}
+  .featured-small-title{font-family:'Archivo Black', sans-serif; font-size:26px; text-transform:uppercase; line-height:1; -webkit-text-stroke:1px #000000; text-stroke:1px #000000;}
+  .featured-small-arrow{margin-top:12px; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; color:#EFBF04;}
 
   .app-section{display:none;}
   .back-btn{
@@ -371,12 +374,17 @@
     <div class="menu-header"><p>Logged in as <b id="menuUserName"></b></p></div>
 
     <div class="menu-info-row">
+      <a class="discord-link-panel" href="https://discord.com/invite/christinaandamber" target="_blank" rel="noopener">
+        <div class="countdown-label">Community</div>
+        <div class="discord-link-title">Join Chamber Discord</div>
+      </a>
       <div class="countdown-panel" id="nextStreamPanel" style="display:none;">
         <div class="countdown-label">Next Stream</div>
+        <div class="countdown-stream-name" id="nextStreamName"></div>
         <div class="countdown-value" id="nextStreamCountdown">—</div>
       </div>
-      <div class="discord-widget-panel" id="discordWidgetPanel" style="display:none;">
-        <iframe id="discordWidgetIframe" height="230" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+      <div class="placeholder-mini-panel">
+        <div class="countdown-label">Coming Soon</div>
       </div>
     </div>
 
@@ -387,11 +395,23 @@
         <div class="featured-sub">Claim your round, check who's qualified, see the results.</div>
         <div class="featured-arrow">Enter →</div>
       </button>
-      <div class="menu-grid">
-        <button class="menu-item" onclick="showSection('stream')"><span>Stream</span><span class="arrow">→</span></button>
-        <button class="menu-item" onclick="showSection('krispysgames')"><span>Krispy's Games</span><span class="arrow">→</span></button>
-        <button class="menu-item" onclick="showSection('merch')"><span>Merch</span><span class="arrow">→</span></button>
-        <button class="menu-item" onclick="showSection('social')"><span>Social Media</span><span class="arrow">→</span></button>
+      <div class="menu-secondary-grid">
+        <button class="menu-featured-small" onclick="showSection('stream')">
+          <div class="featured-small-title">Stream</div>
+          <div class="featured-small-arrow">Enter →</div>
+        </button>
+        <button class="menu-featured-small" onclick="showSection('merch')">
+          <div class="featured-small-title">Merch</div>
+          <div class="featured-small-arrow">Enter →</div>
+        </button>
+        <button class="menu-featured-small" onclick="showSection('krispysgames')">
+          <div class="featured-small-title">Krispy's Games</div>
+          <div class="featured-small-arrow">Enter →</div>
+        </button>
+        <button class="menu-featured-small" onclick="showSection('social')">
+          <div class="featured-small-title">Social Media</div>
+          <div class="featured-small-arrow">Enter →</div>
+        </button>
       </div>
     </div>
   </div>
@@ -667,7 +687,6 @@ function startListening(){
     if(!tournamentData) return;
     updateLiveBanner();
     updateRoundLiveIndicators();
-    updateDiscordWidget();
     if(currentUser) render();
   }, (error) => {
     console.error('Firebase read error:', error);
@@ -683,11 +702,28 @@ function startNextStreamCountdown(){
 function tickNextStreamCountdown(){
   const panel = document.getElementById('nextStreamPanel');
   const valEl = document.getElementById('nextStreamCountdown');
-  if(!panel || !valEl || !tournamentData || !tournamentData.nextStreamAt){
-    if(panel) panel.style.display = 'none';
+  const nameEl = document.getElementById('nextStreamName');
+  if(!panel || !valEl || !tournamentData){ if(panel) panel.style.display = 'none'; return; }
+
+  const name = tournamentData.nextStreamName || '';
+  const isTBA = !!tournamentData.nextStreamTBA;
+  const hasDate = !!tournamentData.nextStreamAt;
+
+  if(!name && !isTBA && !hasDate){
+    panel.style.display = 'none';
     return;
   }
   panel.style.display = 'block';
+  if(nameEl) nameEl.textContent = name;
+
+  if(isTBA){
+    valEl.textContent = 'TBA';
+    return;
+  }
+  if(!hasDate){
+    valEl.textContent = '—';
+    return;
+  }
   const target = new Date(tournamentData.nextStreamAt).getTime();
   const diff = target - Date.now();
   if(diff <= 0){
@@ -698,18 +734,6 @@ function tickNextStreamCountdown(){
   const h = Math.floor((diff % 86400000) / 3600000);
   const m = Math.floor((diff % 3600000) / 60000);
   valEl.textContent = `${d}d ${h}h ${m}m`;
-}
-
-function updateDiscordWidget(){
-  const panel = document.getElementById('discordWidgetPanel');
-  const iframe = document.getElementById('discordWidgetIframe');
-  if(!panel || !iframe || !tournamentData || !tournamentData.discordServerId){
-    if(panel) panel.style.display = 'none';
-    return;
-  }
-  panel.style.display = 'block';
-  const wantedSrc = `https://discord.com/widget?id=${tournamentData.discordServerId}&theme=dark`;
-  if(iframe.getAttribute('src') !== wantedSrc) iframe.src = wantedSrc;
 }
 
 function updateRoundLiveIndicators(){
