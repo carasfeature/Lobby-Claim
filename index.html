@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IT'S NOT A PHASE — Chamber Tournaments</title>
+<title>Chamber — Krispy's Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -43,9 +43,6 @@
   .nav .brand{
     font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:14px; letter-spacing:0.02em;
   }
-  .nav .links{display:flex; gap:28px; font-family:'Space Grotesk', sans-serif; font-weight:500; font-size:13px; letter-spacing:0.04em; text-transform:uppercase;}
-  .nav .links a{padding-bottom:3px; border-bottom:1.5px solid transparent;}
-  .nav .links a:hover{border-color:var(--ink);}
 
   .ticker{
     border-bottom:1.5px solid var(--border);
@@ -60,7 +57,8 @@
   @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
   @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none;} }
 
-  .hero{padding:0 0 40px; text-align:center;}
+  .hero{padding:40px 0; text-align:center;}
+  .hero-center{max-width:900px; margin:0 auto; padding:0 24px;}
   h1.title{
     font-family:'Archivo Black', sans-serif; font-weight:400;
     font-size:5.7vw; line-height:0.92; letter-spacing:-0.015em;
@@ -81,32 +79,7 @@
     margin-top:10px; color:var(--ink-soft); text-transform:uppercase;
   }
   .game-wordmark span{color:var(--ink);}
-
-  .hero-row{
-    display:grid; grid-template-columns:220px 1fr 220px; align-items:center; gap:20px;
-    max-width:1180px; margin:0 auto; padding:0 24px;
-  }
-  .hero-center{justify-self:center; text-align:center; grid-column:2;}
-  .hero-side{grid-column:1; display:flex; flex-direction:column; gap:8px; align-items:flex-start;}
-  .hero-side.discord-side{grid-column:3; align-items:flex-end;}
-  .hero-cta{max-width:210px; display:none; width:100%;}
-  .hero-info{font-family:'Space Grotesk', sans-serif; font-size:23px; font-weight:700; color:var(--ink-soft); letter-spacing:0.02em; text-align:left; line-height:1.15; display:none;}
-  .hero-side.discord-side .hero-info{text-align:right;}
-  .hero-cta a{display:block; text-align:center; padding:13px 12px; border-radius:var(--radius);
-    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.05em;
-    text-transform:uppercase; border:1.5px solid var(--border); line-height:1.4;
-    background:var(--ink); color:var(--bg);}
-  .hero-cta.gift a{border-color:#B8511F;}
-  .hero-cta.gift a:hover{background:#332C24;}
-  .hero-cta.discord a{border-color:#2B5C4A;}
-  .hero-cta.discord a:hover{background:#332C24;}
-  @media (max-width:900px){
-    .hero-row{grid-template-columns:1fr; justify-items:center;}
-    .hero-center{grid-column:1;}
-    .hero-side{grid-column:1; align-items:center; width:100%; max-width:320px;}
-    .hero-side.discord-side{grid-column:1; align-items:center;}
-    .hero-info{text-align:center !important;}
-  }
+  @media (max-width:900px){ h1.title{font-size:15vw;} }
 
   .live-banner{margin:20px 0 0;}
   .live-banner-inner{background:var(--ink); border-radius:var(--radius); padding:13px 20px; text-align:center;}
@@ -154,18 +127,44 @@
   }
   .twitch-btn:hover{background:#7c34e6;}
 
-  .in-app-warning{
-    background:#FFF4E5; border:1.5px solid #E08A3E; border-radius:var(--radius);
-    padding:14px 16px; margin-bottom:16px; text-align:left; font-size:12.5px; color:#5c3d1a; line-height:1.5;
-  }
-  .copy-link-btn{
-    display:block; width:100%; margin-top:10px; padding:10px; border-radius:var(--radius);
-    background:#E08A3E; color:#fff; border:none; font-family:'Space Grotesk', sans-serif;
-    font-weight:700; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer;
-  }
-  .copy-link-btn:hover{background:#c9762f;}
-
   .wrap{max-width:1180px; margin:0 auto; padding:0 24px 80px; display:none;}
+
+  .menu-header{text-align:center; margin-bottom:28px;}
+  .menu-header p{font-size:12px; color:var(--ink-soft);}
+  .menu-header b{color:var(--ink);}
+  .menu-list{display:flex; flex-direction:column; gap:14px; max-width:560px; margin:0 auto;}
+  .menu-item{
+    display:flex; justify-content:space-between; align-items:center;
+    width:100%; padding:24px 28px; background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius);
+    font-family:'Archivo Black', sans-serif; font-size:22px; text-transform:uppercase; letter-spacing:0.01em;
+    color:var(--ink); cursor:pointer; text-align:left; transition:background .15s ease, color .15s ease;
+  }
+  .menu-item:hover{background:var(--ink); color:var(--bg);}
+  .menu-item .arrow{font-family:'Space Grotesk', sans-serif; font-size:18px; font-weight:700;}
+
+  .app-section{display:none;}
+  .back-btn{
+    display:inline-flex; align-items:center; gap:6px; margin-bottom:24px; padding:9px 16px;
+    background:none; border:1.5px solid var(--border); border-radius:var(--radius);
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px;
+    letter-spacing:0.05em; text-transform:uppercase; color:var(--ink); cursor:pointer;
+  }
+  .back-btn:hover{background:var(--ink); color:var(--bg);}
+  .section-title{
+    font-family:'Archivo Black', sans-serif; font-size:34px; text-transform:uppercase;
+    margin-bottom:20px; letter-spacing:-0.01em;
+  }
+  .placeholder-panel{background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:40px 24px; text-align:center;}
+  .placeholder-panel p{font-size:14px; color:var(--ink-soft);}
+
+  .stream-layout{display:flex; gap:16px; align-items:stretch;}
+  .stream-player{flex:1 1 auto; min-width:0; aspect-ratio:16/9; border:1.5px solid var(--border); border-radius:var(--radius); background:#000;}
+  .stream-chat{flex:0 0 340px; height:600px; border:1.5px solid var(--border); border-radius:var(--radius); background:#fff;}
+  @media (max-width:800px){
+    .stream-layout{flex-direction:column;}
+    .stream-chat{flex:none; width:100%; height:420px;}
+  }
+
   .layout{display:grid; grid-template-columns:220px 1fr 220px; gap:22px; align-items:stretch;}
   .panel{background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:20px;}
   .panel-title{
@@ -232,16 +231,8 @@
   .claim-btn.trophy{border-color:#fff; background:#fff; color:var(--ink);}
   .claim-btn.trophy svg{color:var(--red);}
   .claim-btn.trophy:hover:not(:disabled){background:#eee;}
-  .claim-btn.muted{border-color:var(--border-soft); color:var(--ink-soft); cursor:default;}
-  .claim-btn.muted:hover{background:transparent;}
   .claim-btn:disabled{cursor:default; opacity:.75;}
   .claim-btn svg{width:14px; height:14px; flex:none;}
-
-  .card-note{font-size:11px; color:var(--ink-soft); margin-top:8px; text-align:center; line-height:1.4;}
-  .card-note.warn{color:var(--red);}
-  .card-note.info{color:var(--blue);}
-  .round-card.final .card-note{color:#B9B9B4;}
-  .round-card.final .card-note.warn{color:#ff6b5e;}
 
   .code-box{
     border:1.5px dashed var(--border); border-radius:var(--radius); padding:12px 8px;
@@ -255,7 +246,6 @@
   .winner-chip{flex:1 1 200px; max-width:230px; background:var(--bg); border:1px dashed var(--border-soft); border-radius:var(--radius); padding:12px; text-align:center;}
   .winner-chip .r{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:11px; letter-spacing:0.12em; color:var(--ink-soft); text-transform:uppercase;}
   .winner-chip .u{font-size:13px; color:var(--blue); margin-top:6px; font-style:italic; opacity:0.85;}
-  .winner-chip .u.full{color:var(--red);}
 
   .qual-round{margin-bottom:16px;}
   .qual-round:last-child{margin-bottom:0;}
@@ -264,35 +254,9 @@
   .qual-round li{font-size:12px; color:var(--ink-soft); display:flex; gap:8px;}
   .qual-round li b{color:var(--blue); font-family:'Space Grotesk', sans-serif; font-weight:700; width:12px;}
 
-  .left-col{display:flex; flex-direction:column; gap:22px;}
-  .prize-block{margin-bottom:14px;}
-  .prize-block:last-child{margin-bottom:0;}
-  .prize-block h4{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); margin:0 0 8px; padding-bottom:6px; border-bottom:1px solid var(--border-soft);}
-  .prize-block ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:5px;}
-  .prize-block li{font-size:12px; color:var(--ink-soft); display:flex; gap:8px; justify-content:space-between;}
-  .prize-block li b{color:var(--red); font-family:'Space Grotesk', sans-serif; font-weight:700; flex:none;}
-  .prize-block li span{color:var(--ink); font-weight:600;}
-
-  .status-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
-  .status-list li{
-    display:flex; justify-content:space-between; align-items:center; font-size:12px;
-    padding-bottom:8px; border-bottom:1px solid var(--border-soft);
-  }
-  .status-list li:last-child{border-bottom:none; padding-bottom:0;}
-  .status-list .rn{font-family:'Space Grotesk', sans-serif; font-weight:700; color:var(--ink);}
-  .status-list .st{font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; font-size:10.5px;}
-  .st.locked{color:var(--ink-soft);}
-  .st.waiting{color:var(--blue);}
-  .st.claimopen{color:var(--red);}
-  .st.full{color:var(--red);}
-
   @media (max-width:900px){
     .layout{grid-template-columns:1fr;}
     .round-card.final{grid-column:auto;}
-    h1.title{font-size:15vw;}
-  }
-  @media (max-width:640px){
-    .nav .links{gap:16px; font-size:11px;}
   }
 
   footer{text-align:center; margin-top:60px; font-family:'Space Grotesk', sans-serif; letter-spacing:0.2em; font-size:11px; color:var(--ink-soft); text-transform:uppercase;}
@@ -301,166 +265,183 @@
 <body>
 
 <div class="nav">
-  <div class="brand">CHAMBER TOURNAMENTS</div>
-  <div class="links">
-    <a href="#bracket">Bracket</a>
-    <a href="#faq">FAQ</a>
-    <a href="#status">Status</a>
-  </div>
+  <div class="brand">CHAMBER</div>
 </div>
 
 <div class="ticker">
   <div class="ticker-track">
-    <span>CLAIM YOUR ROUND 🌐 CHAMBER TOURNAMENTS 🌐 FIVE ROUNDS TO THE FINAL 🌐 CLAIM YOUR ROUND 🌐 CHAMBER TOURNAMENTS 🌐 FIVE ROUNDS TO THE FINAL 🌐</span>
-    <span>CLAIM YOUR ROUND 🌐 CHAMBER TOURNAMENTS 🌐 FIVE ROUNDS TO THE FINAL 🌐 CLAIM YOUR ROUND 🌐 CHAMBER TOURNAMENTS 🌐 FIVE ROUNDS TO THE FINAL 🌐</span>
+    <span>CHAMBER 🌐 STREAM · TOURNAMENTS · KRISPY'S GAMES · MERCH · SOCIAL 🌐 CHAMBER 🌐 STREAM · TOURNAMENTS · KRISPY'S GAMES · MERCH · SOCIAL 🌐</span>
+    <span>CHAMBER 🌐 STREAM · TOURNAMENTS · KRISPY'S GAMES · MERCH · SOCIAL 🌐 CHAMBER 🌐 STREAM · TOURNAMENTS · KRISPY'S GAMES · MERCH · SOCIAL 🌐</span>
   </div>
 </div>
 
 <div class="hero">
-  <div class="hero-row">
-    <div class="hero-side gift-side">
-      <div class="hero-cta gift">
-        <a href="https://www.twitch.tv/subs/christinaandamber" target="_blank" rel="noopener">Gift 5 subs to enter</a>
-      </div>
-      <div class="hero-info" id="totalGiftedInfo">Loading total gifts…</div>
+  <div class="hero-center">
+    <h1 class="title">IT'S NOT A PHASE</h1>
+    <div class="sub-row">
+      <svg class="orb" viewBox="0 0 60 60"><circle cx="30" cy="30" r="24"/><ellipse cx="30" cy="30" rx="10" ry="24"/><path d="M6 30 h48"/><path d="M9 18 h42"/><path d="M9 42 h42"/></svg>
+      <div class="eyebrow-line">ChristinaAndAmber</div>
+      <svg class="orb" viewBox="0 0 60 60"><circle cx="30" cy="30" r="24"/><ellipse cx="30" cy="30" rx="10" ry="24"/><path d="M6 30 h48"/><path d="M9 18 h42"/><path d="M9 42 h42"/></svg>
     </div>
-    <div class="hero-center">
-      <h1 class="title">IT'S NOT A PHASE</h1>
-      <div class="sub-row">
-        <svg class="orb" viewBox="0 0 60 60"><circle cx="30" cy="30" r="24"/><ellipse cx="30" cy="30" rx="10" ry="24"/><path d="M6 30 h48"/><path d="M9 18 h42"/><path d="M9 42 h42"/></svg>
-        <div class="eyebrow-line">Chamber Tournaments</div>
-        <svg class="orb" viewBox="0 0 60 60"><circle cx="30" cy="30" r="24"/><ellipse cx="30" cy="30" rx="10" ry="24"/><path d="M6 30 h48"/><path d="M9 18 h42"/><path d="M9 42 h42"/></svg>
-      </div>
-      <div class="game-wordmark"><span>FORT</span>NITE</div>
-    </div>
-    <div class="hero-side discord-side">
-      <div class="hero-cta discord">
-        <a href="https://discord.com/invite/christinaandamber" target="_blank" rel="noopener">Join Chamber Discord</a>
-      </div>
-      <div class="hero-info" id="countdownInfo">Loading…</div>
-    </div>
+    <div class="game-wordmark"><span>CHAMBER</span> TOURNAMENTS</div>
   </div>
 </div>
 
 <div class="login-wrap" id="loginWrap">
   <div class="login-panel">
-    <div id="inAppWarning" class="in-app-warning" style="display:none;">
-      ⚠️ You're viewing this inside Twitch's own app browser — Twitch login won't complete here.<br>
-      Tap the <b>•••</b> or <b>share</b> icon above and choose <b>"Open in Browser"</b>, then come back and log in.
-      <button class="copy-link-btn" onclick="copyPageLink()">📋 Copy this link instead</button>
-      <div id="copyLinkStatus" style="font-size:11px; margin-top:4px;"></div>
-    </div>
-    <p>Log in with Twitch to check your gifted sub total and claim your round.</p>
+    <p>Log in with Twitch to enter.</p>
     <button class="twitch-btn" onclick="startLogin()">Login with Twitch</button>
   </div>
 </div>
 
 <div class="wrap" id="wrap">
 
-  <div class="nametag-panel">
-    <div class="nametag-heading">⚠️ Enter Your Fortnite Name</div>
-    <div class="nametag-sub">Required to get into the lobby — we match this to your Twitch account to invite you. Double-check your spelling.</div>
-    <div class="nametag-row">
-      <input type="text" id="nametagInput" placeholder="Your exact in-game name" />
-      <button onclick="saveNametag()">Save</button>
+  <div id="mainMenu">
+    <div class="menu-header"><p>Logged in as <b id="menuUserName"></b></p></div>
+    <div class="menu-list">
+      <button class="menu-item" onclick="showSection('stream')"><span>Stream</span><span class="arrow">→</span></button>
+      <button class="menu-item" onclick="showSection('tournaments')"><span>Tournaments</span><span class="arrow">→</span></button>
+      <button class="menu-item" onclick="showSection('krispysgames')"><span>Krispy's Games</span><span class="arrow">→</span></button>
+      <button class="menu-item" onclick="showSection('merch')"><span>Merch</span><span class="arrow">→</span></button>
+      <button class="menu-item" onclick="showSection('social')"><span>Social Media</span><span class="arrow">→</span></button>
     </div>
-    <div class="nametag-status" id="nametagStatus"></div>
   </div>
 
-  <div class="live-banner" id="liveBanner" style="display:none;">
-    <div class="live-banner-inner"><span id="liveBannerText"><span class="dot"></span>Round 1 is now open</span></div>
+  <div class="app-section" id="section-stream">
+    <button class="back-btn" onclick="showMainMenu()">← Back to menu</button>
+    <div class="section-title">Stream</div>
+    <div class="stream-layout">
+      <iframe class="stream-player" src="https://player.twitch.tv/?channel=christinaandamber&parent=chambergames.app" allowfullscreen frameborder="0"></iframe>
+      <iframe class="stream-chat" src="https://www.twitch.tv/embed/christinaandamber/chat?parent=chambergames.app" frameborder="0"></iframe>
+    </div>
   </div>
 
+  <div class="app-section" id="section-tournaments">
+    <button class="back-btn" onclick="showMainMenu()">← Back to menu</button>
+    <div class="section-title">Tournaments</div>
 
-  <div class="layout">
+    <div class="nametag-panel">
+      <div class="nametag-heading">⚠️ Enter Your Fortnite Name</div>
+      <div class="nametag-sub">Required to get into the lobby — we match this to your Twitch account to invite you. Double-check your spelling.</div>
+      <div class="nametag-row">
+        <input type="text" id="nametagInput" placeholder="Your exact in-game name" />
+        <button onclick="saveNametag()">Save</button>
+      </div>
+      <div class="nametag-status" id="nametagStatus"></div>
+    </div>
 
-    <aside class="panel" id="faq">
-      <p class="panel-title red">FAQ</p>
-      <div id="faqList">
-        <div class="faq-item open">
-          <button class="faq-q"><span class="num">1</span><span>How do I join?</span><span class="chev">+</span></button>
-          <div class="faq-a">
-            <ol>
-              <li>Launch Fortnite.</li>
-              <li>Go to Settings → Game → Language and Region → Matchmaking Region → NA East.</li>
-              <li>Return to the Main Lobby.</li>
-              <li>Scroll down and select Custom Key.</li>
-              <li>Enter the tournament code and click Accept.</li>
-              <li>Select Battle Royale → Zero Build → Solo.</li>
-              <li>Ready Up.</li>
-            </ol>
+    <div class="live-banner" id="liveBanner" style="display:none;">
+      <div class="live-banner-inner"><span id="liveBannerText"><span class="dot"></span>Round 1 is now open</span></div>
+    </div>
+
+    <div class="layout">
+
+      <aside class="panel" id="faq">
+        <p class="panel-title red">FAQ</p>
+        <div id="faqList">
+          <div class="faq-item open">
+            <button class="faq-q"><span class="num">1</span><span>How do I join?</span><span class="chev">+</span></button>
+            <div class="faq-a">
+              <ol>
+                <li>Launch Fortnite.</li>
+                <li>Go to Settings → Game → Language and Region → Matchmaking Region → NA East.</li>
+                <li>Return to the Main Lobby.</li>
+                <li>Scroll down and select Custom Key.</li>
+                <li>Enter the tournament code and click Accept.</li>
+                <li>Select Battle Royale → Zero Build → Solo.</li>
+                <li>Ready Up.</li>
+              </ol>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q"><span class="num">2</span><span>Why do I need to use NA East?</span><span class="chev">+</span></button>
+            <div class="faq-a"><p>Everyone needs to be on NA East so they can successfully join the lobby. You may experience higher ping, but NA East is required.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q"><span class="num">3</span><span>How do I know I'm in?</span><span class="chev">+</span></button>
+            <div class="faq-a"><p>After you Ready Up, you should see the number of players queued. If you see that, just wait for the host to start the match.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q"><span class="num">4</span><span>The code isn't working. What should I do?</span><span class="chev">+</span></button>
+            <div class="faq-a">
+              <p style="margin-bottom:8px;">First, double-check:</p>
+              <ul>
+                <li>You're on NA East,</li>
+                <li>You're using Battle Royale → Zero Build → Solo,</li>
+                <li>You've entered the code correctly,</li>
+                <li>Restart Fortnite and try again.</li>
+              </ul>
+              <p>We'll do our best to help. If you're unable to join, your entry can be rolled over to the next round.</p>
+            </div>
           </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-q"><span class="num">2</span><span>Why do I need to use NA East?</span><span class="chev">+</span></button>
-          <div class="faq-a"><p>Everyone needs to be on NA East so they can successfully join the lobby. You may experience higher ping, but NA East is required.</p></div>
+      </aside>
+
+      <div class="bracket-col" id="bracket">
+        <div class="round-grid" id="roundGrid"></div>
+        <div class="panel winners-panel">
+          <p class="panel-title">Winners</p>
+          <div class="winners-grid" id="winnersGrid"></div>
         </div>
-        <div class="faq-item">
-          <button class="faq-q"><span class="num">3</span><span>How do I know I'm in?</span><span class="chev">+</span></button>
-          <div class="faq-a"><p>After you Ready Up, you should see the number of players queued. If you see that, just wait for the host to start the match.</p></div>
+      </div>
+
+      <aside class="panel">
+        <p class="panel-title blue">Qualified<br>For Finals</p>
+        <div class="qual-round"><h4>Round 1</h4><ol id="qual-list-0"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+        <div class="qual-round"><h4>Round 2</h4><ol id="qual-list-1"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+        <div class="qual-round"><h4>Round 3</h4><ol id="qual-list-2"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+        <div class="qual-round"><h4>Round 4</h4><ol id="qual-list-3"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+        <div class="qual-round"><h4>Round 5</h4><ol id="qual-list-4"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
+      </aside>
+
+    </div>
+
+    <div class="prizes-section">
+      <div class="prize-tiers">
+        <div class="prize-tier">
+          <div class="imgs"><img src="round.png" alt="Round winner prize"></div>
+          <h4>Round Winner</h4>
+          <div class="desc">Lifetime Discord VIP</div>
+          <div class="winner-names" id="roundWinnersList"></div>
         </div>
-        <div class="faq-item">
-          <button class="faq-q"><span class="num">4</span><span>The code isn't working. What should I do?</span><span class="chev">+</span></button>
-          <div class="faq-a">
-            <p style="margin-bottom:8px;">First, double-check:</p>
-            <ul>
-              <li>You're on NA East,</li>
-              <li>You're using Battle Royale → Zero Build → Solo,</li>
-              <li>You've entered the code correctly,</li>
-              <li>Restart Fortnite and try again.</li>
-            </ul>
-            <p>We'll do our best to help. If you're unable to join, your entry can be rolled over to the next round.</p>
+        <div class="prize-tier">
+          <div class="imgs"><img src="christina.png" alt="Christina's Killer prize"></div>
+          <h4>Christina's Killer</h4>
+          <div class="desc">$25</div>
+          <div class="winner-names" id="killerWinnerList"></div>
+        </div>
+        <div class="prize-tier">
+          <div class="imgs">
+            <img src="winner_front.png" alt="Final winner merch front">
+            <img src="winner_back.png" alt="Final winner merch back">
           </div>
+          <h4>Final Winner</h4>
+          <div class="desc">$250 and Chamber x Fortnite Merch</div>
+          <div class="winner-names" id="finalWinnerList"></div>
         </div>
-      </div>
-    </aside>
-
-    <div class="bracket-col" id="bracket">
-      <div class="round-grid" id="roundGrid"></div>
-      <div class="panel winners-panel">
-        <p class="panel-title">Winners</p>
-        <div class="winners-grid" id="winnersGrid"></div>
-      </div>
-    </div>
-
-    <aside class="panel">
-      <p class="panel-title blue">Qualified<br>For Finals</p>
-      <div class="qual-round"><h4>Round 1</h4><ol id="qual-list-0"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
-      <div class="qual-round"><h4>Round 2</h4><ol id="qual-list-1"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
-      <div class="qual-round"><h4>Round 3</h4><ol id="qual-list-2"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
-      <div class="qual-round"><h4>Round 4</h4><ol id="qual-list-3"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
-      <div class="qual-round"><h4>Round 5</h4><ol id="qual-list-4"><li><b>1</b>—</li><li><b>2</b>—</li><li><b>3</b>—</li></ol></div>
-    </aside>
-
-  </div>
-
-  <div class="prizes-section">
-    <div class="prize-tiers">
-      <div class="prize-tier">
-        <div class="imgs"><img src="round.png" alt="Round winner prize"></div>
-        <h4>Round Winner</h4>
-        <div class="desc">Lifetime Discord VIP</div>
-        <div class="winner-names" id="roundWinnersList"></div>
-      </div>
-      <div class="prize-tier">
-        <div class="imgs"><img src="christina.png" alt="Christina's Killer prize"></div>
-        <h4>Christina's Killer</h4>
-        <div class="desc">$25</div>
-        <div class="winner-names" id="killerWinnerList"></div>
-      </div>
-      <div class="prize-tier">
-        <div class="imgs">
-          <img src="winner_front.png" alt="Final winner merch front">
-          <img src="winner_back.png" alt="Final winner merch back">
-        </div>
-        <h4>Final Winner</h4>
-        <div class="desc">$250 and Chamber x Fortnite Merch</div>
-        <div class="winner-names" id="finalWinnerList"></div>
       </div>
     </div>
   </div>
 
-  <footer>Chamber Tournaments · It's Not A Phase</footer>
+  <div class="app-section" id="section-krispysgames">
+    <button class="back-btn" onclick="showMainMenu()">← Back to menu</button>
+    <div class="section-title">Krispy's Games</div>
+    <div class="placeholder-panel"><p>Coming soon.</p></div>
+  </div>
+
+  <div class="app-section" id="section-merch">
+    <button class="back-btn" onclick="showMainMenu()">← Back to menu</button>
+    <div class="section-title">Merch</div>
+    <div class="placeholder-panel"><p>Coming soon.</p></div>
+  </div>
+
+  <div class="app-section" id="section-social">
+    <button class="back-btn" onclick="showMainMenu()">← Back to menu</button>
+    <div class="section-title">Social Media</div>
+    <div class="placeholder-panel"><p>Coming soon.</p></div>
+  </div>
+
+  <footer>Chamber · It's Not A Phase</footer>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
@@ -494,11 +475,29 @@ function startLogin(){
   window.location.href = url;
 }
 
+// ---- Navigation between main menu and app sections ----
+function showSection(name){
+  document.getElementById('mainMenu').style.display = 'none';
+  document.querySelectorAll('.app-section').forEach(s => s.style.display = 'none');
+  const el = document.getElementById('section-' + name);
+  if(el) el.style.display = 'block';
+  window.location.hash = 'section=' + name;
+  window.scrollTo(0, 0);
+  if(name === 'tournaments'){
+    drawTrace();
+    setTimeout(drawTrace, 200);
+    if(tournamentData) render();
+  }
+}
+function showMainMenu(){
+  document.querySelectorAll('.app-section').forEach(s => s.style.display = 'none');
+  document.getElementById('mainMenu').style.display = 'block';
+  history.replaceState(null, '', window.location.pathname);
+  window.scrollTo(0, 0);
+}
+
 async function init(){
   buildRoundGrid();
-  drawTrace();
-  setTimeout(drawTrace, 400);
-  window.addEventListener('resize', drawTrace);
 
   document.querySelectorAll('.faq-item').forEach(item=>{
     item.querySelector('.faq-q').addEventListener('click', ()=>{
@@ -508,9 +507,7 @@ async function init(){
     });
   });
 
-  startCountdown();
   startListening();
-  detectInAppBrowser();
 
   const hash = window.location.hash;
   if(hash.includes('access_token')){
@@ -521,49 +518,6 @@ async function init(){
       history.replaceState(null, '', window.location.pathname);
     }
   }
-}
-
-function detectInAppBrowser(){
-  const ua = navigator.userAgent || '';
-  // Known in-app browser signatures (Twitch, Instagram, TikTok, Facebook, Line, etc.)
-  // Best-effort only — shows the warning banner automatically when detected.
-  const signatures = ['Twitch', 'Instagram', 'TikTok', 'FBAN', 'FBAV', 'Line/', 'MicroMessenger'];
-  const looksInApp = signatures.some(sig => ua.includes(sig));
-  if(looksInApp){
-    const warn = document.getElementById('inAppWarning');
-    if(warn) warn.style.display = 'block';
-  }
-}
-
-function copyPageLink(){
-  const url = window.location.href.split('#')[0];
-  const statusEl = document.getElementById('copyLinkStatus');
-  navigator.clipboard.writeText(url).then(() => {
-    if(statusEl) statusEl.textContent = '✅ Copied! Paste it into Safari or Chrome.';
-  }).catch(() => {
-    if(statusEl) statusEl.textContent = url;
-  });
-}
-
-function startCountdown(){
-  const target = new Date('2026-08-30T14:00:00-04:00').getTime(); // Aug 30 2026, 2PM Eastern
-  const el = document.getElementById('countdownInfo');
-  let timer;
-  function tick(){
-    if(!el) return;
-    const diff = target - Date.now();
-    if(diff <= 0){
-      el.textContent = '🔴 Tournament is LIVE!';
-      if(timer) clearInterval(timer);
-      return;
-    }
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    el.textContent = `Starts in ${d}d ${h}h ${m}m`;
-  }
-  tick();
-  timer = setInterval(tick, 1000);
 }
 
 async function fetchUser(token){
@@ -577,8 +531,7 @@ async function fetchUser(token){
       currentDisplay = data.data[0].display_name;
       document.getElementById('loginWrap').style.display = 'none';
       document.getElementById('wrap').style.display = 'block';
-      document.querySelectorAll('.hero-cta').forEach(el => el.style.display = 'block');
-      document.querySelectorAll('.hero-info').forEach(el => el.style.display = 'block');
+      document.getElementById('menuUserName').textContent = currentDisplay;
       loadNametag();
       if(tournamentData) render();
     }
@@ -605,9 +558,8 @@ function saveNametag(){
 function startListening(){
   fbDb.ref('tournament').on('value', (snapshot) => {
     tournamentData = snapshot.val();
-    if(!tournamentData) return; // leave default locked buttons showing until data arrives
+    if(!tournamentData) return;
     updateLiveBanner();
-    updateTotalGiftedCounter();
     updateRoundLiveIndicators();
     if(currentUser) render();
   }, (error) => {
@@ -616,7 +568,7 @@ function startListening(){
 }
 
 function updateRoundLiveIndicators(){
-  const currentRoundNum = tournamentData.currentRound; // 1-5, 'final', or null/undefined if nothing active
+  const currentRoundNum = tournamentData.currentRound;
   (tournamentData.rounds || []).forEach((r, i) => {
     const card = document.getElementById('card-round-' + i);
     const spotsEl = document.getElementById('spots-round-' + i);
@@ -642,14 +594,6 @@ function updateRoundLiveIndicators(){
   if(finalCard) finalCard.classList.toggle('live-now', currentRoundNum === 'final');
 }
 
-function updateTotalGiftedCounter(){
-  const el = document.getElementById('totalGiftedInfo');
-  if(!el) return;
-  const elig = tournamentData.eligibility || {};
-  const total = Object.values(elig).reduce((a,b) => a + (b || 0), 0);
-  el.textContent = `${total} subs gifted so far`;
-}
-
 function buildRoundGrid(){
   let html = '<svg class="trace" id="traceSvg"></svg>';
   for(let i=0;i<5;i++){
@@ -670,7 +614,6 @@ function render(){
   if(!tournamentData || !currentUser) return;
   const count = (tournamentData.eligibility || {})[currentUser] || 0;
 
-  // Rounds 1-4: laddered, per-user qualified list
   (tournamentData.rounds || []).forEach((r, i) => {
     const btnwrap = document.getElementById('btnwrap-round-' + i);
     const key = 'r' + i;
@@ -687,7 +630,6 @@ function render(){
     }
   });
 
-  // Round 5: free-for-all, no per-user check
   const r5 = tournamentData.round5 || {};
   const r5btnwrap = document.getElementById('btnwrap-round-4');
   if(revealedRounds.has('r5')){
@@ -698,7 +640,6 @@ function render(){
     r5btnwrap.innerHTML = `<button class="claim-btn" disabled>${LOCK_ICON}Claim</button>`;
   }
 
-  // Final: manually curated only — no automatic gifting access
   const finalsQualified = ((tournamentData.finals || {}).qualified || []).includes(currentUser);
   const finalsOpen = !!(tournamentData.finals || {}).open && !!(tournamentData.finals || {}).code;
   const isFinalLive = tournamentData.currentRound === 'final';
@@ -752,6 +693,7 @@ function updateLiveBanner(){
 
   const banner = document.getElementById('liveBanner');
   const text = document.getElementById('liveBannerText');
+  if(!banner || !text) return;
   if(openNames.length === 0){
     banner.style.display = 'none';
     return;
