@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chamber — Krispy's Hub</title>
+<title>Chamber Games</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -132,15 +132,33 @@
   .menu-header{text-align:center; margin-bottom:28px;}
   .menu-header p{font-size:12px; color:var(--ink-soft);}
   .menu-header b{color:var(--ink);}
-  .menu-list{display:flex; flex-direction:column; gap:14px; max-width:560px; margin:0 auto;}
+  .menu-wrap{max-width:640px; margin:0 auto;}
+
+  .menu-featured{
+    display:block; width:100%; text-align:left; cursor:pointer;
+    background:var(--ink); color:var(--bg); border:1.5px solid var(--ink); border-radius:var(--radius);
+    padding:36px 32px; margin-bottom:16px; transition:transform .15s ease;
+  }
+  .menu-featured:hover{transform:translateY(-2px);}
+  .featured-badge{
+    display:inline-flex; align-items:center; gap:6px; background:#EFBF04; color:var(--ink);
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:11px; letter-spacing:0.1em;
+    text-transform:uppercase; padding:5px 12px; border-radius:20px; margin-bottom:16px;
+  }
+  .featured-title{font-family:'Archivo Black', sans-serif; font-size:38px; text-transform:uppercase; line-height:1; margin-bottom:8px;}
+  .featured-sub{font-size:13px; color:#C9C2B4; max-width:420px; line-height:1.5;}
+  .featured-arrow{margin-top:18px; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:13px; letter-spacing:0.05em; text-transform:uppercase; color:#EFBF04;}
+
+  .menu-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media (max-width:560px){ .menu-grid{grid-template-columns:1fr;} }
   .menu-item{
     display:flex; justify-content:space-between; align-items:center;
-    width:100%; padding:24px 28px; background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius);
-    font-family:'Archivo Black', sans-serif; font-size:22px; text-transform:uppercase; letter-spacing:0.01em;
-    color:var(--ink); cursor:pointer; text-align:left; transition:background .15s ease, color .15s ease;
+    width:100%; padding:18px 20px; background:var(--card); border:1.5px solid var(--border-soft); border-radius:var(--radius);
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:0.03em;
+    color:var(--ink); cursor:pointer; text-align:left; transition:border-color .15s ease, background .15s ease;
   }
-  .menu-item:hover{background:var(--ink); color:var(--bg);}
-  .menu-item .arrow{font-family:'Space Grotesk', sans-serif; font-size:18px; font-weight:700;}
+  .menu-item:hover{border-color:var(--ink); background:var(--bg);}
+  .menu-item .arrow{font-family:'Space Grotesk', sans-serif; font-size:14px; font-weight:700; color:var(--ink-soft);}
 
   .app-section{display:none;}
   .back-btn{
@@ -164,6 +182,15 @@
     .stream-layout{flex-direction:column;}
     .stream-chat{flex:none; width:100%; height:420px;}
   }
+
+  .visit-store-btn{
+    display:inline-block; margin-bottom:16px; padding:12px 22px; background:var(--ink); color:var(--bg);
+    border-radius:var(--radius); font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:13px;
+    letter-spacing:0.05em; text-transform:uppercase;
+  }
+  .visit-store-btn:hover{background:#332C24;}
+  .merch-embed-wrap{border:1.5px solid var(--border); border-radius:var(--radius); overflow:hidden; background:#fff;}
+  .merch-iframe{width:100%; height:80vh; min-height:600px; border:none; display:block;}
 
   .layout{display:grid; grid-template-columns:220px 1fr 220px; gap:22px; align-items:stretch;}
   .panel{background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius); padding:20px;}
@@ -270,8 +297,8 @@
 
 <div class="ticker">
   <div class="ticker-track">
-    <span>CHAMBER 🌐 STREAM · TOURNAMENTS · KRISPY'S GAMES · MERCH · SOCIAL 🌐 CHAMBER 🌐 STREAM · TOURNAMENTS · KRISPY'S GAMES · MERCH · SOCIAL 🌐</span>
-    <span>CHAMBER 🌐 STREAM · TOURNAMENTS · KRISPY'S GAMES · MERCH · SOCIAL 🌐 CHAMBER 🌐 STREAM · TOURNAMENTS · KRISPY'S GAMES · MERCH · SOCIAL 🌐</span>
+    <span>CHAMBER 🌐 TOURNAMENTS · STREAM · KRISPY'S GAMES · MERCH · SOCIAL 🌐 CHAMBER 🌐 TOURNAMENTS · STREAM · KRISPY'S GAMES · MERCH · SOCIAL 🌐</span>
+    <span>CHAMBER 🌐 TOURNAMENTS · STREAM · KRISPY'S GAMES · MERCH · SOCIAL 🌐 CHAMBER 🌐 TOURNAMENTS · STREAM · KRISPY'S GAMES · MERCH · SOCIAL 🌐</span>
   </div>
 </div>
 
@@ -298,12 +325,19 @@
 
   <div id="mainMenu">
     <div class="menu-header"><p>Logged in as <b id="menuUserName"></b></p></div>
-    <div class="menu-list">
-      <button class="menu-item" onclick="showSection('stream')"><span>Stream</span><span class="arrow">→</span></button>
-      <button class="menu-item" onclick="showSection('tournaments')"><span>Tournaments</span><span class="arrow">→</span></button>
-      <button class="menu-item" onclick="showSection('krispysgames')"><span>Krispy's Games</span><span class="arrow">→</span></button>
-      <button class="menu-item" onclick="showSection('merch')"><span>Merch</span><span class="arrow">→</span></button>
-      <button class="menu-item" onclick="showSection('social')"><span>Social Media</span><span class="arrow">→</span></button>
+    <div class="menu-wrap">
+      <button class="menu-featured" onclick="showSection('tournaments')">
+        <div class="featured-badge">🏆 Main Event</div>
+        <div class="featured-title">Tournaments</div>
+        <div class="featured-sub">Claim your round, check who's qualified, see the results.</div>
+        <div class="featured-arrow">Enter →</div>
+      </button>
+      <div class="menu-grid">
+        <button class="menu-item" onclick="showSection('stream')"><span>Stream</span><span class="arrow">→</span></button>
+        <button class="menu-item" onclick="showSection('krispysgames')"><span>Krispy's Games</span><span class="arrow">→</span></button>
+        <button class="menu-item" onclick="showSection('merch')"><span>Merch</span><span class="arrow">→</span></button>
+        <button class="menu-item" onclick="showSection('social')"><span>Social Media</span><span class="arrow">→</span></button>
+      </div>
     </div>
   </div>
 
@@ -432,7 +466,10 @@
   <div class="app-section" id="section-merch">
     <button class="back-btn" onclick="showMainMenu()">← Back to menu</button>
     <div class="section-title">Merch</div>
-    <div class="placeholder-panel"><p>Coming soon.</p></div>
+    <a class="visit-store-btn" href="https://www.itsnotaphase.club" target="_blank" rel="noopener">Open store in a new tab →</a>
+    <div class="merch-embed-wrap">
+      <iframe class="merch-iframe" src="https://www.itsnotaphase.club" frameborder="0"></iframe>
+    </div>
   </div>
 
   <div class="app-section" id="section-social">
