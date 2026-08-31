@@ -183,14 +183,19 @@
     .stream-chat{flex:none; width:100%; height:420px;}
   }
 
-  .visit-store-btn{
-    display:inline-block; margin-bottom:16px; padding:12px 22px; background:var(--ink); color:var(--bg);
+  .merch-featured{
+    display:block; max-width:640px; margin:0 auto; text-align:center; cursor:pointer;
+    background:var(--ink); color:var(--bg); border:1.5px solid var(--ink); border-radius:var(--radius);
+    padding:56px 32px; transition:transform .15s ease;
+  }
+  .merch-featured:hover{transform:translateY(-2px);}
+  .merch-featured-title{font-family:'Archivo Black', sans-serif; font-size:32px; text-transform:uppercase; margin-bottom:10px;}
+  .merch-featured-sub{font-size:13px; color:#C9C2B4; margin-bottom:24px;}
+  .merch-featured-cta{
+    display:inline-block; padding:14px 28px; background:#EFBF04; color:var(--ink);
     border-radius:var(--radius); font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:13px;
     letter-spacing:0.05em; text-transform:uppercase;
   }
-  .visit-store-btn:hover{background:#332C24;}
-  .merch-embed-wrap{border:1.5px solid var(--border); border-radius:var(--radius); overflow:hidden; background:#fff;}
-  .merch-iframe{width:100%; height:80vh; min-height:600px; border:none; display:block;}
 
   .social-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:640px; margin:0 auto 16px;}
   @media (max-width:560px){.social-grid{grid-template-columns:1fr;}}
@@ -487,10 +492,11 @@
   <div class="app-section" id="section-merch">
     <button class="back-btn" onclick="showMainMenu()">← Back to menu</button>
     <div class="section-title">Merch</div>
-    <a class="visit-store-btn" href="https://www.itsnotaphase.club" target="_blank" rel="noopener">Open store in a new tab →</a>
-    <div class="merch-embed-wrap">
-      <iframe class="merch-iframe" src="https://www.itsnotaphase.club" frameborder="0"></iframe>
-    </div>
+    <a class="merch-featured" href="https://www.itsnotaphase.club" target="_blank" rel="noopener">
+      <div class="merch-featured-title">It's Not A Phase</div>
+      <div class="merch-featured-sub">The official store — clothing, accessories, and more.</div>
+      <div class="merch-featured-cta">Shop Now →</div>
+    </a>
   </div>
 
   <div class="app-section" id="section-social">
