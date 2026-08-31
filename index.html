@@ -9,12 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#F1ECDF;
-    --card:#FFFFFF;
-    --ink:#241F19;
-    --ink-soft:#6B6B66;
-    --border:#241F19;
-    --border-soft:#DEDBD2;
+    --bg:#565F55;
+    --card:#454C46;
+    --ink:#F1EEE7;
+    --ink-soft:#C7C9BE;
+    --border:#7A8172;
+    --border-soft:#5C6355;
     --red:#E23B2E;
     --red-tint:rgba(226,59,46,0.08);
     --blue:#1567A8;
@@ -82,7 +82,7 @@
   @media (max-width:900px){ h1.title{font-size:15vw;} }
 
   .live-banner{margin:20px 0 0;}
-  .live-banner-inner{background:var(--ink); border-radius:var(--radius); padding:13px 20px; text-align:center;}
+  .live-banner-inner{background:var(--card); border-radius:var(--radius); padding:13px 20px; text-align:center;}
   .live-banner-inner span{font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:0.1em; font-size:13px; text-transform:uppercase; color:#fff;}
   .live-banner-inner .dot{display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--red); margin-right:10px; animation:pulse 1.4s ease infinite;}
   @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
@@ -93,7 +93,7 @@
     color:var(--red); letter-spacing:0.01em; margin-bottom:5px;}
   .nametag-sub{font-size:12px; color:var(--ink-soft); margin-bottom:14px; line-height:1.4;}
   .nametag-row{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
-  .nametag-panel input{flex:1; min-width:200px; padding:12px 14px; border:1.5px solid var(--border-soft); border-radius:var(--radius); font-family:'IBM Plex Mono', monospace; font-size:14px; font-weight:600; color:var(--ink);}
+  .nametag-panel input{flex:1; min-width:200px; padding:12px 14px; border:1.5px solid var(--border-soft); border-radius:var(--radius); font-family:'IBM Plex Mono', monospace; font-size:14px; font-weight:600; color:var(--ink); background:var(--card);}
   .nametag-panel button{flex:none; padding:12px 22px; border-radius:var(--radius); background:var(--red); color:#fff; border:none; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer;}
   .nametag-panel button:hover{background:#c73226;}
   .nametag-status{font-size:11px; color:var(--blue); flex-basis:100%;}
@@ -136,7 +136,7 @@
 
   .menu-featured{
     display:block; width:100%; text-align:left; cursor:pointer;
-    background:var(--ink); color:var(--bg); border:1.5px solid var(--ink); border-radius:var(--radius);
+    background:var(--card); color:var(--ink); border:1.5px solid var(--card); border-radius:var(--radius);
     padding:36px 32px; margin-bottom:16px; transition:transform .15s ease;
   }
   .menu-featured:hover{transform:translateY(-2px);}
@@ -148,6 +148,10 @@
   .featured-title{font-family:'Archivo Black', sans-serif; font-size:38px; text-transform:uppercase; line-height:1; margin-bottom:8px;}
   .featured-sub{font-size:13px; color:#C9C2B4; max-width:420px; line-height:1.5;}
   .featured-arrow{margin-top:18px; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:13px; letter-spacing:0.05em; text-transform:uppercase; color:#EFBF04;}
+  @media (max-width:480px){
+    .menu-featured{padding:26px 22px;}
+    .featured-title{font-size:28px;}
+  }
 
   .menu-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
   @media (max-width:560px){ .menu-grid{grid-template-columns:1fr;} }
@@ -167,7 +171,7 @@
     font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px;
     letter-spacing:0.05em; text-transform:uppercase; color:var(--ink); cursor:pointer;
   }
-  .back-btn:hover{background:var(--ink); color:var(--bg);}
+  .back-btn:hover{background:var(--card); color:var(--ink);}
   .section-title{
     font-family:'Archivo Black', sans-serif; font-size:34px; text-transform:uppercase;
     margin-bottom:20px; letter-spacing:-0.01em;
@@ -185,22 +189,25 @@
 
   .merch-featured{
     display:block; max-width:640px; margin:0 auto; text-align:center; cursor:pointer;
-    background:var(--ink); color:var(--bg); border:1.5px solid var(--ink); border-radius:var(--radius);
+    background:var(--card); color:var(--ink); border:1.5px solid var(--card); border-radius:var(--radius);
     padding:56px 32px; transition:transform .15s ease;
   }
   .merch-featured:hover{transform:translateY(-2px);}
   .merch-featured-title{font-family:'Archivo Black', sans-serif; font-size:32px; text-transform:uppercase; margin-bottom:10px;}
   .merch-featured-sub{font-size:13px; color:#C9C2B4; margin-bottom:24px;}
+  @media (max-width:480px){
+    .merch-featured{padding:36px 22px;}
+    .merch-featured-title{font-size:24px;}
+  }
   .merch-featured-cta{
     display:inline-block; padding:14px 28px; background:#EFBF04; color:var(--ink);
     border-radius:var(--radius); font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:13px;
     letter-spacing:0.05em; text-transform:uppercase;
   }
 
-  .social-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:640px; margin:0 auto 16px;}
-  @media (max-width:560px){.social-grid{grid-template-columns:1fr;}}
+  .social-grid{display:flex; flex-direction:column; gap:14px; max-width:520px; margin:0 auto 16px;}
   .social-btn{
-    display:block; padding:22px; background:var(--ink); color:var(--bg);
+    display:block; padding:22px; background:var(--card); color:var(--ink);
     border-radius:var(--radius); border:1.5px solid; font-family:'Space Grotesk', sans-serif;
     font-weight:700; font-size:15px; letter-spacing:0.03em; text-transform:uppercase; text-align:center;
     transition:background .15s ease;
@@ -213,7 +220,7 @@
   .snap-card h4{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:16px; color:var(--ink);}
   .snap-links{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
   .snap-links a, .snap-links .snap-name{
-    padding:12px 20px; background:var(--ink); color:var(--bg); border:1.5px solid #EFBF04;
+    padding:12px 20px; background:var(--card); color:var(--ink); border:1.5px solid #EFBF04;
     border-radius:var(--radius); font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:13px;
     text-transform:uppercase; letter-spacing:0.03em; display:inline-block;
   }
@@ -267,13 +274,13 @@
   }
   .spots-left{font-size:11px; color:var(--ink-soft); text-align:center; margin-top:8px; font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:0.03em;}
   .spots-left.full{color:var(--red); font-weight:700;}
-  .round-card.final{grid-column:2; background:var(--ink); border-color:var(--ink);}
+  .round-card.final{grid-column:2; background:var(--card); border-color:var(--card);}
   .round-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
   .round-head h3{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:15px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink);}
   .round-card.final .round-head h3{color:#fff;}
   .claim-btn{
-    width:100%; padding:14px 10px; border-radius:var(--radius); background:var(--ink);
-    border:1.5px solid #660000; color:var(--bg);
+    width:100%; padding:14px 10px; border-radius:var(--radius); background:var(--card);
+    border:1.5px solid #660000; color:var(--ink);
     font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:0.1em; font-size:14px;
     text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:8px;
     cursor:pointer; transition:background .15s ease, color .15s ease;
@@ -281,7 +288,7 @@
   .claim-btn:hover:not(:disabled){background:#332C24;}
   .claim-btn.open{background:transparent; border-color:var(--blue); color:var(--blue);}
   .claim-btn.open:hover{background:var(--blue-tint);}
-  .claim-btn.trophy{border-color:#fff; background:#fff; color:var(--ink);}
+  .claim-btn.trophy{border-color:#fff; background:#fff; color:var(--card);}
   .claim-btn.trophy svg{color:var(--red);}
   .claim-btn.trophy:hover:not(:disabled){background:#eee;}
   .claim-btn:disabled{cursor:default; opacity:.75;}
@@ -504,15 +511,15 @@
     <div class="section-title">Social Media</div>
     <div class="social-grid">
       <a class="social-btn" style="border-color:#2B5C4A;" href="https://discord.com/invite/christinaandamber" target="_blank" rel="noopener">Join Chamber Discord</a>
-      <a class="social-btn" style="border-color:#1567A8;" href="https://www.youtube.com/@christinaandamber" target="_blank" rel="noopener">ChristinaAndAmber YouTube</a>
       <a class="social-btn" style="border-color:#B8511F;" href="https://www.tiktok.com/@christinaottrando" target="_blank" rel="noopener">Christina's TikTok</a>
       <a class="social-btn" style="border-color:#660000;" href="https://www.tiktok.com/@amberlawes" target="_blank" rel="noopener">Amber's TikTok</a>
-    </div>
-    <div class="snap-card">
-      <h4>Follow Christina &amp; Amber on Snapchat</h4>
-      <div class="snap-links">
-        <span class="snap-name">Christina — @cottrando</span>
-        <span class="snap-name">Amber — @amberlawss</span>
+      <a class="social-btn" style="border-color:#1567A8;" href="https://www.youtube.com/@christinaandamber" target="_blank" rel="noopener">ChristinaAndAmber YouTube</a>
+      <div class="snap-card">
+        <h4>Follow Christina &amp; Amber on Snapchat</h4>
+        <div class="snap-links">
+          <span class="snap-name">Christina — @cottrando</span>
+          <span class="snap-name">Amber — @amberlawss</span>
+        </div>
       </div>
     </div>
   </div>
