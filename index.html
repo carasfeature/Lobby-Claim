@@ -205,17 +205,20 @@
   .merch-gallery img{width:100%; height:auto; display:block; border:1.5px solid var(--card); border-radius:var(--radius); object-fit:cover;}
   @media (max-width:560px){ .merch-gallery{grid-template-columns:1fr;} }
 
+  .merch-buttons-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:640px; margin:0 auto;}
+  @media (max-width:560px){ .merch-buttons-row{grid-template-columns:1fr;} }
+
   .merch-featured{
-    display:block; max-width:640px; margin:0 auto; text-align:center; cursor:pointer;
+    display:block; text-align:center; cursor:pointer;
     background:var(--card); color:var(--ink); border:1.5px solid var(--card); border-radius:var(--radius);
-    padding:56px 32px; transition:transform .15s ease;
+    padding:40px 24px; transition:transform .15s ease;
   }
   .merch-featured:hover{transform:translateY(-2px);}
-  .merch-featured-title{font-family:'Archivo Black', sans-serif; font-size:32px; text-transform:uppercase; margin-bottom:10px; -webkit-text-stroke:1.5px #000000; text-stroke:1.5px #000000;}
+  .merch-featured-title{font-family:'Archivo Black', sans-serif; font-size:26px; text-transform:uppercase; margin-bottom:10px; -webkit-text-stroke:1.5px #000000; text-stroke:1.5px #000000;}
   .merch-featured-sub{font-size:13px; color:#C9C2B4; margin-bottom:24px;}
   @media (max-width:480px){
-    .merch-featured{padding:36px 22px;}
-    .merch-featured-title{font-size:24px;}
+    .merch-featured{padding:32px 20px;}
+    .merch-featured-title{font-size:22px;}
   }
   .merch-featured-cta{
     display:inline-block; padding:14px 28px; background:#EFBF04; color:var(--ink);
@@ -550,11 +553,18 @@
       <img src="accesories.png" alt="Merch preview">
       <img src="shirts1.png" alt="Merch preview">
     </div>
-    <a class="merch-featured" href="https://www.itsnotaphase.club/clothing" target="_blank" rel="noopener">
-      <div class="merch-featured-title">It's Not A Phase</div>
-      <div class="merch-featured-sub">The official store — clothing, accessories, and more.</div>
-      <div class="merch-featured-cta">Shop Now →</div>
-    </a>
+    <div class="merch-buttons-row">
+      <a class="merch-featured" href="https://www.itsnotaphase.club/clothing" target="_blank" rel="noopener">
+        <div class="merch-featured-title">Clothing</div>
+        <div class="merch-featured-sub">Tees, hoodies, and more.</div>
+        <div class="merch-featured-cta">Shop Now →</div>
+      </a>
+      <a class="merch-featured" href="https://itsnotaphase-drop3-shop.fourthwall.com/en-pln" target="_blank" rel="noopener">
+        <div class="merch-featured-title">Accessories</div>
+        <div class="merch-featured-sub">Pins, stickers, and more.</div>
+        <div class="merch-featured-cta">Shop Now →</div>
+      </a>
+    </div>
   </div>
 
   <div class="app-section" id="section-social">
