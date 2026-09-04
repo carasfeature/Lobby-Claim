@@ -40,14 +40,14 @@
 
   /* Ambient background motion */
   .ambient-orbs{position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;}
-  .orb{position:absolute; border-radius:50%; filter:blur(90px); opacity:0.22;}
-  .orb-blue{width:520px; height:520px; background:#4D7FFF; top:-10%; left:-8%; animation:driftA 26s ease-in-out infinite;}
-  .orb-magenta{width:480px; height:480px; background:#E0339B; bottom:-12%; right:-6%; animation:driftB 32s ease-in-out infinite;}
-  .orb-lime{width:360px; height:360px; background:#9ADB2E; top:40%; left:55%; animation:driftC 22s ease-in-out infinite;}
+  .ambient-orb{position:absolute; border-radius:50%; filter:blur(90px); opacity:0.22;}
+  .ambient-orb-blue{width:520px; height:520px; background:#4D7FFF; top:-10%; left:-8%; animation:driftA 26s ease-in-out infinite;}
+  .ambient-orb-magenta{width:480px; height:480px; background:#E0339B; bottom:-12%; right:-6%; animation:driftB 32s ease-in-out infinite;}
+  .ambient-orb-lime{width:360px; height:360px; background:#9ADB2E; top:40%; left:55%; animation:driftC 22s ease-in-out infinite;}
   @keyframes driftA{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(60px,80px);} }
   @keyframes driftB{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(-70px,-50px);} }
   @keyframes driftC{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,60px);} }
-  @media (prefers-reduced-motion: reduce){ .orb{animation:none;} }
+  @media (prefers-reduced-motion: reduce){ .ambient-orb{animation:none;} }
 
   .nav, .ticker, .hero, .login-wrap, .wrap{position:relative; z-index:1;}
 
@@ -57,8 +57,8 @@
     content:attr(data-text); position:absolute; top:0; left:0; width:100%; height:100%;
     background:var(--bg); overflow:hidden; -webkit-text-stroke:1.5px #000000; text-stroke:1.5px #000000;
   }
-  h1.title::before{color:#4D7FFF; animation:glitchTop 6s infinite linear; z-index:-1;}
-  h1.title::after{color:#E0339B; animation:glitchBottom 6s infinite linear; z-index:-1;}
+  h1.title::before{color:#4D7FFF; animation:glitchTop 6s infinite linear;}
+  h1.title::after{color:#E0339B; animation:glitchBottom 6s infinite linear;}
   @keyframes glitchTop{
     0%,92%,100%{ clip-path:inset(0 0 100% 0); transform:translate(0,0); }
     93%{ clip-path:inset(10% 0 65% 0); transform:translate(-3px,-1px); }
@@ -395,9 +395,9 @@
 <body>
 
 <div class="ambient-orbs" aria-hidden="true">
-  <div class="orb orb-blue"></div>
-  <div class="orb orb-magenta"></div>
-  <div class="orb orb-lime"></div>
+  <div class="ambient-orb ambient-orb-blue"></div>
+  <div class="ambient-orb ambient-orb-magenta"></div>
+  <div class="ambient-orb ambient-orb-lime"></div>
 </div>
 
 
